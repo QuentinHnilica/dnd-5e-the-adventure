@@ -35,3 +35,14 @@ fetch(startUrl).then(function(response){
         makeChar(apiInfo, refUrl)
     })
 })
+
+
+
+// var seconds = 0;
+// setInterval(function() {
+// seconds++;
+// console.log(seconds)
+// if (myChar != null){
+//     console.log(myChar)
+// }
+// }, 1000);
