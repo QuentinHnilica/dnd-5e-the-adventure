@@ -39,4 +39,4 @@ function makeChar(apiInfo, refUrl){
     })
 }
 
-
+console.log("this is a test")
