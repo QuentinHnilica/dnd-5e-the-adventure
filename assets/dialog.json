@@ -1,0 +1,100 @@
+[
+    {
+        "name": "William",
+        "greet": "Hello how are you",
+        "goodby":"See ya latter",
+        "nice":  "Thank you darling",
+        "mean":   "How dare you!"
+        
+
+    },
+    {
+        "name":"Alice",
+        "greet": "Hello my adventurer",
+        "goodby":"Farewll my gallent friend",
+        "nice":  "It has been my pleasure to meet you",
+        "mean":  "I dont ever want to see you again",
+    },
+    {
+        "name":  "Thomas",
+        "greet" : "Hail fellow",
+        "goodby": "fare thee well ",
+        "nice":   "I see the finest in thee",
+        "mean":   "your a crooked nose knave"
+    
+    
+    },
+    {   
+        "name":    "Isabella", 
+        "greet":    "Mine own hearts root",
+        "goodby":   "I shall see you anon",
+         "nice":     "Well met",
+        "mean":      "you pig-snotted cod peice",
+    },
+
+    {
+        "name":       "Godwin",
+        "greet":      "How fare thee",
+        "goodby":     "Fare thee well I must away",
+         "nice":        "Good health be yours",
+        "mean":       "leave me you fool-born puss filled peasant"
+
+
+    },    
+     {   
+    "name":          "Emma",
+    "greet":         "Good Morrow",
+    "goodby":        "go thy way ",
+     "nice":         "How fare thee my good friend",
+    "mean":         "You treachrous villianous villiage idiot",
+     }
+
+    { "name":       "Richard",
+      "greet":      "How now",  
+      "goodby":     "farewell",
+      "nice":       "I owe my good fortune to you",
+       "mean":      "You are a rude son of a scullery maid",
+    },
+    {
+       "name":      "Joan",
+       "greet":     "Good day",
+       "goodby":    "Walk every with care",
+       "nice":      "I will always remember your favorable assistance",
+       "mean":      "Do not speak to me you vomit eating soulless peon",
+
+    },
+    {
+      "name":         "Walter",
+      "greet":        "Hail well met",
+      "goodby":       "To all I bid good night", 
+      "nice":         "Never have I met a finer person",
+      "mean":         "your ill-mannered currish buffoon friend must leave",
+    },
+    {
+        "name":        "Agnes",
+        "greet":       "Very good to see you",
+        "goodby":      "May the wind always be at your back and the sun always shine on you",
+        "nice":        "You are head shoulder above the rest",
+        "mean":        "Even Satan is scared of you"
+        
+
+
+
+    },
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+    },
+]
