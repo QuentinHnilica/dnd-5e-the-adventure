@@ -5,8 +5,6 @@
         "goodby":"See ya latter",
         "nice":  "Thank you darling",
         "mean":   "How dare you!"
-        
-
     },
     {
         "name":"Alice",
@@ -21,8 +19,6 @@
         "goodby": "fare thee well ",
         "nice":   "I see the finest in thee",
         "mean":   "your a crooked nose knave"
-    
-    
     },
     {   
         "name":    "Isabella", 
@@ -38,8 +34,6 @@
         "goodby":     "Fare thee well I must away",
         "nice":        "Good health be yours",
         "mean":       "leave me you fool-born puss filled peasant"
-
-
     },    
     {   
         "name":          "Emma",
@@ -49,6 +43,7 @@
         "mean":         "You treachrous villianous villiage idiot"
     },
 
+  
     {
         "name":       "Richard",
         "greet":      "How now",  
