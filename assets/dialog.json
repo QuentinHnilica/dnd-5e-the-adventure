@@ -43,7 +43,8 @@
         "mean":         "You treachrous villianous villiage idiot"
     },
 
-    { 
+  
+    {
         "name":       "Richard",
         "greet":      "How now",  
         "goodby":     "farewell",
@@ -70,6 +71,6 @@
         "greet":       "Very good to see you",
         "goodby":      "May the wind always be at your back and the sun always shine on you",
         "nice":        "You are head shoulder above the rest",
-        "mean":        "Even Satan is scared of you" 
+        "mean":        "Even Satan is scared of you"
     }
 ]
