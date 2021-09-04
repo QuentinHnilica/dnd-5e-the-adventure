@@ -1,7 +1,7 @@
 var startUrl = 'https://www.dnd5eapi.co/api'
 var refUrl = 'https://www.dnd5eapi.co'
 var apiInfo = {}
-
+var startButton = document.getElementsByClassName('start_btn')
 
 //When you need an API Reference use 'refUrl + apiInfo.property
 //Ex fetch/startUrl + apiInfo.casses
@@ -32,33 +32,42 @@ fetch(startUrl).then(function(response){
         // subraces: "/api/subraces"
         // traits: "/api/traits"
         // weapon-properties: "/api/weapon-properties"
-        makeChar(apiInfo, refUrl)
+        
     })
 })
 
 
 
-// var seconds = 0;
-// setInterval(function() {
-// seconds++;
-// console.log(seconds)
-// if (myChar != null){
-//     console.log(myChar)
-// }
-// }, 1000);
- function diceRoller ()
- {
-  console.log(Math.floor(Math.random() * (21 - 1) + 1))   
-//12 sided
-console.log(Math.floor(Math.random() * (13 - 1) + 1))
-//10 sided 
-console.log(Math.floor(Math.random() * (11 - 1) + 1))
-//8 sided 
-console.log(Math.floor(Math.random() * (9 - 1) + 1))
-//6 sided 
-console.log(Math.floor(Math.random() * (7- 1) + 1))
-// 4 sided 
-console.log(Math.floor(Math.random() * (5- 1) + 1))
+var seconds = 0;
+setInterval(function() {
+seconds++;
+if (myChar != null){
+    if (startBattle == true){
+        startBattle = false;
+        battleStart()
 
+    }
 }
-diceRoller()
+}, 1000);
+function diceRoller ()
+{
+    console.log(Math.floor(Math.random() * (21 - 1) + 1))   
+    //12 sided
+    console.log(Math.floor(Math.random() * (13 - 1) + 1))
+    //10 sided 
+    console.log(Math.floor(Math.random() * (11 - 1) + 1))
+    //8 sided 
+    console.log(Math.floor(Math.random() * (9 - 1) + 1))
+    //6 sided 
+    console.log(Math.floor(Math.random() * (7- 1) + 1))
+    // 4 sided 
+    console.log(Math.floor(Math.random() * (5- 1) + 1))
+}
+
+//diceRoller()
+
+function startGame(){
+    makeChar(apiInfo, refUrl)
+}
+
+startButton[0].children[0].addEventListener('click', startGame)

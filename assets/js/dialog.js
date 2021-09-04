@@ -1,3 +1,4 @@
+
 // list of characters to talk to
 // click button open with start dialog
 // make buttons with character responses
@@ -18,13 +19,3 @@ fetch('./assets/dialog.json')
             document.body.appendChild(newButton)
         }
     })
-
-
-
-
-
-
-
-
-
-
