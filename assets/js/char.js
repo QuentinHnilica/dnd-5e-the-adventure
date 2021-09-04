@@ -74,6 +74,7 @@ var rangerAttacks = [
 ]
 
 var stats = {}
+var startBattle = false
 
 
 
@@ -87,6 +88,7 @@ function search(nameKey, myArray){
 }
 function nameSubmit(e){
     myChar.name = document.getElementById('nameBox').value
+    startBattle = true;
     // start the game here
 }
 
