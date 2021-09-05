@@ -1,6 +1,7 @@
 var myChar = {} //During char creation use this object to add properties
 var inventory = {}
 var searchUrl
+var playerDead = false
 var equipmentUrl = '/api/equipment/'
 var spellUrl = '/api/spells/'
 var theData
@@ -8,68 +9,81 @@ var raceButtons = []
 var possibleClasses = ['Wizard', 'Barbarian', 'Ranger']
 var classButtons = []
 var wizardSpells = [
-    fireBolt={discription:
-    'You hurl a mote of fire at a creature',
-    damage: 10,
-    atkNum: 1},
+    fireBolt={
+        discription: 'You hurl a mote of fire at a creature',
+        damage: 10,
+        atkNum: 1,
+        name: 'fire Bolt'
+    },
     frostBite={
         discription: 'You cause numbing frost to form on one creature',
         damage: 6,
-        atkNum: 2
+        atkNum: 2,
+        name: 'frost Bite'
     },
     flameShield={
         discription:'2 rounds of attacks',
         damage : 0,
-        atkNum : 0
+        atkNum : 0,
+        name: 'flame Shield'
     },
     magicMissle = {
         discription: 'choose 3 targets to shoot magic missle at',
         damage : 6,
-        atkNum : 3
+        atkNum : 3,
+        name: 'magic Missle'
     }
 ]
 var barbarianAttacks = [
     greatAxe = {
         discription: 'Stike enemy down with a swing of your axe',
         damage : 10,
-        atkNum : 1
+        atkNum : 1,
+        name: "Great Axe"
     },
     rage = {
         discription: 'Enter rage mode, allowing you to attack twice on your turn',
         damage : 0,
-        atkNum : 0
+        atkNum : 0,
+        name: 'rage'
     },
     armorUp = {
         discription: 'get a +2 to AC for the battle',
         damage : 0,
-        atkNum : 0
+        atkNum : 0,
+        name: 'armorUp'
     },
     execute = {
         discription: 'Jump towards an enemy slicing them down the middle. If it executes, you can use again',
         damage : 12,
-        atkNum : 1
+        atkNum : 1,
+        name: 'execute'
     }
 ]
 var rangerAttacks = [
     longbow = {
         discription: 'Hurl an arrow at your foe',
         damage : 10,
-        atkNum : 1
+        atkNum : 1,
+        name: 'longbow'
     },
     chargeBow = {
         discription: 'next attack will do 3x damage',
         damage : 0,
-        atkNum : 0
+        atkNum : 0,
+        name: 'Charge Bow'
     },
     heal = {
         discription: 'heal yourself up to 6 hp',
         damage : 6,
-        atkNum : 1
+        atkNum : 1,
+        name: 'Heal'
     },
     multiShot = {
         discription: 'Shoot 3 Arrows at your target',
         damage : 6,
-        atkNum : 3
+        atkNum : 3,
+        name: 'Multi Shot'
     }
 ]
 
@@ -159,6 +173,15 @@ function pickSpells(chosenClass){
         myChar.stats = stats
     }
     nameChar()
+}
+
+function applyDamage(amt){
+    myChar.currHP -= amt
+    console.log(myChar.currHP)
+    if (myChar.currHP <= 0){
+        console.log('you die')
+        playerDead = true;
+    }
 }
 
 function chooseClass(e){
