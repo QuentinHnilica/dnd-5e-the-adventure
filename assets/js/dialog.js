@@ -13,8 +13,17 @@ var characters = []
     var thisObject
 function displayText(e){
     var myResponse =e.target.innerText
-    console.log(myResponse,thisObject)
-    pEl.innerText=thisObject.myResponse
+    if(myResponse==="nice"){
+        pEl.innerText=thisObject.nice
+    }
+    else if(myResponse==="mean"){
+        pEl.innerText=thisObject.mean 
+
+    } 
+    else if (myResponse==="goodby"){
+        pEl.innerText=thisObject.goodby
+    }
+
 }
     function startDialog(e){
         var thisCharacter=e.target.innerText
