@@ -1,7 +1,7 @@
 var testDummy = {
     dummyAttacks : [
         basicAttack = {
-            damage : 4,
+            damage : 1,
             atkNum : 1
         }
     ],
@@ -26,7 +26,6 @@ var playersTurn = false
 var myTarget
 var myMove
 
-console.log(enemiesToFight)
 
 function rollInitiative(){ //find turn rotation
     var turnRotation = []
@@ -44,7 +43,6 @@ function rollInitiative(){ //find turn rotation
     turnRotation.sort((b, a) => {
         return a.thierRoll - b.thierRoll;
     });
-    console.log(turnRotation)
     return turnRotation
 }
 
@@ -55,7 +53,6 @@ function battleOver(){
 
 function checkForDeath(){
     var c = 0 //counterVar
-    console.log(turnOrder)
     for (var i = 0; i < turnOrder.length; i++){      
         if (turnOrder[i].enemy != null){
             if (turnOrder[i].enemy.isDead === true){
@@ -83,16 +80,17 @@ function battleLogic(){ //this is where the battle code is. Also, the var turn i
         }
     }
     else{ // enemy battle logic
-        if(turnOrder[turn].isDead === false){
+        if(turnOrder[turn].enemy.isDead == false){
             var myAttack = turnOrder[turn].enemy.dummyAttacks[0]
             myRoll = Math.floor(Math.random() * (21 -1 ) + 1) + turnOrder[turn].enemy.stats.str
             if (myRoll > myChar.ac){
                 //do damage
+                console.log('damage Has Been done')
                 applyDamage(turnOrder[turn].enemy.dummyAttacks[0].damage)
             }
             else{
                 //you miss
-                console.log('you miss')
+                console.log('enemy miss')
             }
     
             turn++
@@ -117,7 +115,6 @@ function battleLogic(){ //this is where the battle code is. Also, the var turn i
 }
 
 function useMove(e){
-    console.log(playersTurn, myTarget)
     if (playersTurn == true && myTarget != null){
         if (myTarget.isDead === false){
             var myMoveName = e.target.innerText
@@ -126,8 +123,8 @@ function useMove(e){
                 var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
                 if (diceRoll >= myTarget.ac){
                     myTarget.hp -= getMove.damage
+                    console.log(myTarget.hp)
                     if(myTarget.hp <= 0){
-                        console.log(myTarget)
                         myTarget.isDead = true
                     }
                     playersTurn = false
@@ -140,6 +137,7 @@ function useMove(e){
                 }
                 else{
                     console.log('you miss')
+                    playersTurn = false
                     battleLogic()
                 }
             }
@@ -155,18 +153,16 @@ function setTarget(e){
     var targetName = e.target.innerText
     var getEnemy = search(targetName, enemiesToFight)
     myTarget = getEnemy
+    console.log(myTarget)
 
 }
 
 function battleStart(){
-    console.log(enemiesToFight)
     amtOfEnemies = Math.floor(Math.random() * (4 - 1) + 1) //chooses 1 - 3 enemies for the player to fight
     for (var i = 0; i < amtOfEnemies; i++){
-        var newEnemy = testDummy //Make a table of enemies and choose a random one
+        var newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
         newEnemy.name = 'testDummy' + (i + 1)
-        console.log(newEnemy.name)
         enemiesToFight[i] = newEnemy
-        console.log(enemiesToFight)
         var enemyButton = document.createElement('button')
         enemyButton.innerText = newEnemy.name
         enemyButton.addEventListener('click', setTarget)
@@ -180,6 +176,5 @@ function battleStart(){
     }
     console.log(enemiesToFight)
     turnOrder = rollInitiative()
-    console.log(turnOrder)
     battleLogic()
 }
