@@ -25,7 +25,24 @@ var amtOfEnemies
 var playersTurn = false
 var myTarget
 var myMove
+var button0
+var button1
+var button2
+var battlePage = ''
+var activeShield = false
+var shieldMax = 2
+var shieldCount = 1
+var canUseAU = true
+var chargeActive = false
+var isRaged = false
+var rageCount = 0
+var targets = [] //for your ult
+var multiAttack
+var canUlt = true
+var executeAgain = false
+var barbUlt
 
+var thePTag
 
 function rollInitiative(){ //find turn rotation
     var turnRotation = []
@@ -47,6 +64,14 @@ function rollInitiative(){ //find turn rotation
 }
 
 function battleOver(){
+    armorUPBuff(false)
+    canUseAU = true
+    isRaged = false
+    chargeActive = false
+    shieldCount = 1
+    activeShield = false
+    destroyContent()
+    dialogContent()
     console.log("battleOver")
 }
 
@@ -67,12 +92,29 @@ function checkForDeath(){
     return false
 }
 
-
+function BattleText(str){
+    
+    thePTag.innerText = str
+    var genTime = setInterval(() => {
+        
+        thePTag.innerText = ''
+        turn++
+            if(turn === turnOrder.length){
+                turn = 0
+            }
+            if (playerDead == true){
+                return
+            }
+            
+        clearInterval(genTime)
+        battleLogic()
+    }, 3000);
+}
 
 
 function battleLogic(){ //this is where the battle code is. Also, the var turn is the index.
     if (turnOrder[turn].enemy == null){ //player battle logic
-        console.log('players turn')
+        thePTag.innerText = 'Your Turn'
         playersTurn = true;
         turn++
         if (turn === turnOrder.length){
@@ -85,22 +127,28 @@ function battleLogic(){ //this is where the battle code is. Also, the var turn i
             myRoll = Math.floor(Math.random() * (21 -1 ) + 1) + turnOrder[turn].enemy.stats.str
             if (myRoll > myChar.ac){
                 //do damage
-                console.log('damage Has Been done')
-                applyDamage(turnOrder[turn].enemy.dummyAttacks[0].damage)
+                if (activeShield === false){
+                    applyDamage(turnOrder[turn].enemy.dummyAttacks[0].damage, true)
+                    BattleText('Enemy Hit You')
+                    
+                }
+                else{
+                    shieldCount++
+                    if (shieldCount > shieldMax){
+                        activeShield = false
+                        shieldCount = 1
+                        BattleText('Shield Broken')
+                    }
+                    else{
+                        BattleText('ShieldBlocked')
+                    }
+                }
+                
             }
             else{
                 //you miss
-                console.log('enemy miss')
+                BattleText('EnemyMissed')
             }
-    
-            turn++
-            if(turn === turnOrder.length){
-                turn = 0
-            }
-            if (playerDead == true){
-                return
-            }
-            battleLogic()
         }
         else{
             turn++
@@ -113,68 +161,263 @@ function battleLogic(){ //this is where the battle code is. Also, the var turn i
     }
    
 }
-
-function useMove(e){
-    if (playersTurn == true && myTarget != null){
-        if (myTarget.isDead === false){
-            var myMoveName = e.target.innerText
-            var getMove = search(myMoveName, myChar.attacks)
-            if (getMove.damage != 0){
+function getTargets(targetAmt , theMove){
+    var moveUpdate = setInterval(function(){
+        if (targets.length < targetAmt){
+   
+        }
+        else{
+            for (var i = 0; i < targets.length; i++){
                 var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
-                if (diceRoll >= myTarget.ac){
-                    myTarget.hp -= getMove.damage
-                    console.log(myTarget.hp)
-                    if(myTarget.hp <= 0){
-                        myTarget.isDead = true
+                if (diceRoll >= targets[i].ac){
+                    if (chargeActive){
+                        targets[i].hp -= theMove.damage * 3
+                        chargeActive = false
                     }
-                    playersTurn = false
+                    else{
+                        targets[i].hp -= theMove.damage
+                    }
+                    
+                    if(targets[i].hp <= 0){
+                        targets[i].isDead = true
+                    }
+                    else{
+                        //button2.lastChild.innerText = newEnemy.hp
+                        //update HP Element here and in the if above.
+                    }
+                    
                     var gameOver = checkForDeath()
                     if (gameOver){
                         battleOver()
                     }
-                    else
-                    battleLogic()
                 }
-                else{
-                    console.log('you miss')
-                    playersTurn = false
-                    battleLogic()
-                }
+            }
+            playersTurn = false
+            multiAttack = false
+            canUlt = false
+            clearInterval(moveUpdate)
+            battleLogic()
+            
+        }
+    }, 1000)
+}
+
+function executeUlt(){
+    if(myTarget.isDead === false){
+        var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
+        if (diceRoll >= myTarget.ac){
+            myTarget.hp -= barbUlt.damage + 5
+            if(myTarget.hp > 0){
+                executeAgain = false
+                battleLogic()
+                console.log('didnt kill')
+            }
+            else{
+                console.log('did kill')
+                myTarget.isDead = true
+            }
+    
+            var gameOver = checkForDeath()
+            if (gameOver){
+                battleOver()
             }
         }
         else{
-            console.log('enemy is dead, choose another target')
+            executeAgain = false
+            battleLogic()
         }
-        
+    }
+}
+
+function useMove(e){
+    
+    var myMoveName = e.target.innerText
+    var getMove = search(myMoveName, myChar.attacks)
+    if (getMove.damage != 0 && getMove.name != 'Heal'){
+        if (getMove.atkNum < 2){
+            if (playersTurn == true && myTarget != null){
+                if(getMove.name != 'execute'){
+                    if (myTarget.isDead === false){
+                        var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
+                        if (diceRoll >= myTarget.ac){
+                            if (chargeActive){
+                                myTarget.hp -= getMove.damage * 3
+                                chargeActive = false
+                            }
+                            else{
+                                myTarget.hp -= getMove.damage
+                            }
+                            
+                            console.log(myTarget.hp)
+                            if(myTarget.hp <= 0){
+                                myTarget.isDead = true
+                            }
+                            else{
+                                //button2.lastChild.innerText = newEnemy.hp
+                                //update HP Element here and in the if above.
+                            }
+                            
+                            var gameOver = checkForDeath()
+                            if (gameOver){
+                                battleOver()
+                            }
+                            else{
+                                if (isRaged == false){
+                                    rageCount = 0
+                                    playersTurn = false
+                                    battleLogic()
+                                }
+                                else{
+                                    rageCount ++
+                                    if (rageCount > 1){
+                                        rageCount = 0
+                                        battleLogic()
+                                    }
+                                }                      
+                            }   
+                        }
+                        else{
+                            if (isRaged == false){
+                                rageCount = 0
+                                playersTurn = false
+                                battleLogic()
+                                BattleText('You Missed')
+                            }
+                            else{
+                                rageCount ++
+                                if (rageCount > 1){
+                                    rageCount = 0
+                                    battleLogic()
+                                }
+                            }   
+                        }
+                        
+                    }
+                    else{
+                        thePTag.innerText = 'enemy is dead, choose another target'
+                    }
+                }
+                else{
+                    if(canUlt){
+                        canUlt = false
+                        barbUlt = getMove
+                        executeAgain = true
+                        executeUlt()
+                    }   
+                }        
+            }
+        }  
+        else{
+            if (canUlt){
+                if (targets.length < getMove.atkNum){
+                    multiAttack = true
+                    getTargets(getMove.atkNum, getMove)      
+                    
+                }
+            }
+            else{
+                thePTag.innerText = 'Cant use right now'
+            }
+        }
+    }
+    else{
+        if(playersTurn){
+            if (getMove.name === 'Heal'){
+                applyDamage(getMove.damage, false)
+                battleLogic()
+            }
+            else if (getMove.name === 'flame Shield' && activeShield === false){
+                activeShield = true
+                battleLogic()
+            }
+            else if (getMove.name === 'rage' && isRaged === false){
+                isRaged = true
+                battleLogic()
+            }
+            else if (getMove.name === 'armorUp' && canUseAU){
+                canUseAU = false
+                armorUPBuff(true)
+                battleLogic()
+            }
+            else if (getMove.name === 'Charge Bow' && chargeActive == false){
+                chargeActive = true
+                battleLogic()
+            }
+        }
     }
 }
 
 function setTarget(e){
     var targetName = e.target.innerText
     var getEnemy = search(targetName, enemiesToFight)
-    myTarget = getEnemy
-    console.log(myTarget)
+    
+    if (multiAttack){
+        targets.push(getEnemy)
+    }
+    else{
+        myTarget = getEnemy
+        if (executeAgain){
+            executeUlt()
+        }
+    }
+}
 
+function destroyExtraButtons(buttonsToKill){
+    for (var i = 0; i < buttonsToKill.length; i++){
+        buttonsToKill[i].firstChild.remove()
+    }
 }
 
 function battleStart(){
+    battleContent()
+    destroyButtArr = []
+    thePTag = document.querySelector('#battleText')
     amtOfEnemies = Math.floor(Math.random() * (4 - 1) + 1) //chooses 1 - 3 enemies for the player to fight
+    if (amtOfEnemies === 1){
+        button0 = document.getElementById('enemy2')
+        button1 = document.getElementById('enemy1')
+        button2 = document.getElementById('enemy3')
+        destroyButtArr.push(button1)
+        destroyButtArr.push(button2)
+        destroyExtraButtons(destroyButtArr)
+    }
+    else if( amtOfEnemies === 2){
+        button0 = document.getElementById('enemy1')
+        button1 = document.getElementById('enemy3')
+        button2 = document.getElementById('enemy2')
+        destroyButtArr.push(button2)
+        destroyExtraButtons(destroyButtArr)
+    }
+    else{
+        button0 = document.getElementById('enemy1')
+        button1 = document.getElementById('enemy2')
+        button2 = document.getElementById('enemy3')
+    }
     for (var i = 0; i < amtOfEnemies; i++){
         var newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
         newEnemy.name = 'testDummy' + (i + 1)
         enemiesToFight[i] = newEnemy
-        var enemyButton = document.createElement('button')
-        enemyButton.innerText = newEnemy.name
-        enemyButton.addEventListener('click', setTarget)
-        document.body.appendChild(enemyButton)
+        if (i === 0){
+            button0.firstChild.innerText = newEnemy.name
+            button0.lastChild.innerText = newEnemy.hp
+            button0.firstChild.addEventListener('click', setTarget)
+        }
+        else if(i === 1){
+            button1.firstChild.innerText = newEnemy.name
+            button1.lastChild.innerText = newEnemy.hp
+            button1.firstChild.addEventListener('click', setTarget)
+        }
+        else{
+            button2.firstChild.innerText = newEnemy.name
+            button2.lastChild.innerText = newEnemy.hp
+            button2.firstChild.addEventListener('click', setTarget)
+        }
     }
     for (var o = 0; o < myChar.attacks.length; o++){
-        var newButton = document.createElement('button')
+        var newButton = document.querySelector('#attack' + o)
         newButton.innerText = myChar.attacks[o].name
         newButton.addEventListener('click', useMove)
-        document.body.appendChild(newButton)
     }
-    console.log(enemiesToFight)
     turnOrder = rollInitiative()
     battleLogic()
 }

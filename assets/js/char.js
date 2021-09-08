@@ -22,7 +22,7 @@ var wizardSpells = [
         name: 'frost Bite'
     },
     flameShield={
-        discription:'2 rounds of attacks',
+        discription:'Absorb 2 rounds of attacks',
         damage : 0,
         atkNum : 0,
         name: 'flame Shield'
@@ -89,8 +89,13 @@ var rangerAttacks = [
 
 var stats = {}
 var startBattle = false
-
-
+var raceOption = document.querySelector('#races')
+var classOption = document.querySelector('#classes')
+var finishedButton = document.querySelector('#finished')
+var nameBox = document.querySelector('#myName')
+var model = document.querySelector('#charMod')
+var charSheetButton = document.querySelector('#viewChar')
+var charModel = document.querySelector('#charSheet')
 
 //general function for getting info from API
 function search(nameKey, myArray){
@@ -100,36 +105,47 @@ function search(nameKey, myArray){
         }
     }
 }
-function nameSubmit(e){
-    myChar.name = document.getElementById('nameBox').value
-    startBattle = true;
-    // start the game here
-}
 
-function nameChar(){ //gives choose your name
-    var newTextbox = document.createElement('input')
-    newTextbox.setAttribute('type', 'text')
-    newTextbox.setAttribute('id', 'nameBox')
-    var newButton = document.createElement('button')
-    newButton.innerHTML = 'Submit Name'
-    document.body.appendChild(newTextbox)
-    document.body.appendChild(newButton)
-    
-    newButton.addEventListener('click', nameSubmit)
-}
+function makeCharSheet(){
+    document.getElementById('charName').innerText = myChar.name
+    document.getElementById('str').innerText = myChar.stats.str
+    document.getElementById('wis').innerText = myChar.stats.wis
+    document.getElementById('con').innerText = myChar.stats.con
+    document.getElementById('int').innerText = myChar.stats.int
+    document.getElementById('char').innerText = myChar.stats.char
+    document.getElementById('dex').innerText = myChar.stats.dex
 
-
-function destroyButtons(){ //refactor later into the html js file
-    for (var i = 0; i < classButtons.length; i++){
-        raceButtons[i].remove()
+    document.getElementById('init').innerText = "Initiative: " + myChar.initiative
+    document.getElementById('hp').innerText = "Current HP: " + myChar.currHP
+    for (var i=0; i<4; i++){
+        var moveTag = document.querySelector('#move' + (i+1))
+        if(myChar.attacks[i].damage > 0){
+            moveTag.innerText = myChar.attacks[i].name + ": " + myChar.attacks[i].discription + " (" + myChar.attacks[i].atkNum
+            + "D" + myChar.attacks[i].damage + " + 5)"     
+        }
+        else{
+            moveTag.innerText = myChar.attacks[i].name + ": " + myChar.attacks[i].discription
+        }
+        
     }
 }
 
+function pickSpells(){
+    var chosenClass = classOption.value
 
-function pickSpells(chosenClass){
-    for (var i = 0; i < classButtons.length; i++){
-        classButtons[i].remove()
+    var myRace = raceOption.value
+    var raceIndex = search(myRace, theData.results)
+    if (raceIndex != null){
+        fetch(refUrl + raceIndex.url).then(function(response){
+            response.json().then(function(data){
+                var raceData = data
+                myChar.race = myRace
+                myChar.size = data.size
+                myChar.speed = data.speed
+            })
+        })
     }
+
     if (chosenClass == 'Wizard'){
         myChar.attacks = wizardSpells
         stats.str = -1
@@ -172,65 +188,42 @@ function pickSpells(chosenClass){
         myChar.ac = 15
         myChar.stats = stats
     }
-    nameChar()
+
+    myChar.name = nameBox.value
+    makeCharSheet()
+    startBattle = true;
+    model.classList.remove('is-active')
 }
 
-function applyDamage(amt){
-    myChar.currHP -= amt
-    console.log(myChar.currHP)
-    if (myChar.currHP <= 0){
-        console.log('you die')
-        playerDead = true;
+function applyDamage(amt, bool){
+    if (bool){
+        myChar.currHP -= amt
+        console.log(myChar.currHP)
+        if (myChar.currHP <= 0){
+            console.log('you die')
+            playerDead = true;
+        }
     }
-}
-
-function chooseClass(e){
+    else{
+        myChar.currHP += amt
+        if (myChar.currHP > myChar.maxHP){
+            myChar.currHP = myChar.maxHP
+        }
+    }
     
-    var myClass = e.target.innerHTML
-    var classIndex = search(myClass, theData.results)
-    if (classIndex != null){
-        fetch(refUrl + classIndex.url).then(function(response){
-            response.json().then(function(data){
-                myChar.class = myClass
-                pickSpells(myClass)
-            })
-        })
-    }
 }
 
-function displayClass(){ //to choose your class
-    for (var i = 0; i < raceButtons.length; i++){
-        raceButtons[i].remove()
+function armorUPBuff(bool){
+    if (bool){
+        myChar.ac += 2
     }
-    fetch(refUrl + apiInfo.classes).then(function(response){
-        response.json().then(function(data){
-            for (var i = 0; i < 3; i++){
-                theData= data
-                var newButton = document.createElement('button')
-                newButton.innerHTML = possibleClasses[i]
-                document.body.appendChild(newButton)
-                classButtons.push(newButton)
-                newButton.addEventListener('click', chooseClass)
-            }
-        })
-    })
+    else{
+        myChar.ac = 15
+    }
+    
 }
 
-function addRace(e){
-    var myRace = e.target.innerHTML
-    var raceIndex = search(myRace, theData.results)
-    if (raceIndex != null){
-        fetch(refUrl + raceIndex.url).then(function(response){
-            response.json().then(function(data){
-                var raceData = data
-                myChar.race = myRace
-                myChar.size = data.size
-                myChar.speed = data.speed
-                displayClass()
-            })
-        })
-    }
-}
+
 
 //Starts Charactor creation
 function makeChar(apiInfo, refUrl){
@@ -239,13 +232,34 @@ function makeChar(apiInfo, refUrl){
         response.json().then(function(data){
             theData = data
             for (var i = 0; i < data.results.length; i++){
-                var newButton = document.createElement('button')
+                var newButton = document.createElement('option')
                 newButton.innerHTML = data.results[i].name
-                document.body.appendChild(newButton)
-                raceButtons.push(newButton)
-                newButton.addEventListener('click', addRace)
+                races.appendChild(newButton)
             }
         })
     })
+
+
+    fetch(refUrl + apiInfo.classes).then(function(response){
+        response.json().then(function(data){
+            for (var i = 0; i < 3; i++){
+                var newButton = document.createElement('option')
+                newButton.innerHTML = possibleClasses[i]
+                classOption.appendChild(newButton)
+            }
+        })
+    })
+
+    
 }
 
+function showChar(){
+    if (myChar.name != null){
+        charModel.classList.add('is-active')
+    }
+    
+}
+
+charSheetButton.addEventListener('click', showChar)
+
+finishedButton.addEventListener('click', pickSpells)

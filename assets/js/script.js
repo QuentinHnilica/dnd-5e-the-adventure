@@ -1,7 +1,8 @@
 var startUrl = 'https://www.dnd5eapi.co/api'
 var refUrl = 'https://www.dnd5eapi.co'
 var apiInfo = {}
-var startButton = document.getElementsByClassName('start_btn')
+var startButton = document.getElementById('start-Button')
+
 
 //When you need an API Reference use 'refUrl + apiInfo.property
 //Ex fetch/startUrl + apiInfo.casses
@@ -44,6 +45,7 @@ seconds++;
 if (myChar != null){
     if (startBattle == true){
         startBattle = false;
+        destroyContent()
         battleStart()
 
     }
@@ -68,6 +70,7 @@ function diceRoller ()
 
 function startGame(){
     makeChar(apiInfo, refUrl)
+    model.classList.add('is-active')
 }
 
-startButton[0].children[0].addEventListener('click', startGame)
+startButton.addEventListener('click', startGame)
