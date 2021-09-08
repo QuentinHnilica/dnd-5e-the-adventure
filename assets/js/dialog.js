@@ -1,59 +1,61 @@
-// list of characters to talk to
-// click button open with start dialog
-// make buttons with character responses
-// display their response
-// keep doing this until the player  goodbye button or get quest button
-// Do quest stuff later
-// if they hit goodbye, display the goodbye text and then end the dialog
 var characters = []
-    var chrButtons =[]
-    var pEl
-    var buttonText =["quest","nice","mean","goodby"]
-    var thisObject
+var chrButtons =[]
+var pEl
+var buttonText =["quest","nice","mean","goodby"]
+var thisObject
+var showNPCButton = document.querySelector('#showList')
+var modelNpc = document.querySelector('#dialogMod')
 function displayText(e){
     var myResponse =e.target.innerText
-    if(myResponse==="nice"){
+    if(myResponse === "nice"){
         pEl.innerText=thisObject.nice
     }
-    else if(myResponse==="mean"){
+    else if(myResponse === "mean"){
         pEl.innerText=thisObject.mean 
 
     } 
-    else if (myResponse==="goodby"){
+    else if (myResponse === "goodby"){
         pEl.innerText=thisObject.goodby
+        var waitTimer = setInterval(() => {
+            console.log("this is a one Second Wait")
+            clearInterval(waitTimer)
+            destroyContent()
+        }, 1500);
+
+        
+
     }
 
 }
-    function startDialog(e){
-        var thisCharacter=e.target.innerText
-         for (var i=0;i<chrButtons.length;i++){
-             chrButtons[i].remove()
-         }
-         chrButtons=[]
-         pEl=document.createElement("p")
-         thisObject=search(thisCharacter,characters)
-         pEl.innerText=thisObject.greet 
-         document.body.appendChild(pEl)
-         for(var o=0;o<4;o++){
-            var newButton = document.createElement("button")
-            newButton.innerText=buttonText[o]  
-            chrButtons.push(newButton)
-            document.body.appendChild(newButton)
-            newButton.addEventListener("click",displayText)
+function startDialog(e){
+    modelNpc.classList.remove('is-active')
+    var thisCharacter=e.target.innerText
+    destroyContent()
+    dialogContent()
+    pEl=document.querySelector('#response')
+    thisObject=search(thisCharacter,characters)
+    pEl.innerText=thisObject.greet 
+    for(var o=0;o<4;o++){
+    var newButton = document.querySelector('#option' + o)
+    newButton.innerText=buttonText[o]  
+    newButton.addEventListener("click",displayText)
 
-         }
     }
-fetch('./assets/dialog.json')
+}
+function showNPCs(){
+    modelNpc.classList.add('is-active')
+    fetch('./assets/dialog.json')
     .then(function (response) {
         return response.json()
     })
     .then(function (data) {
         characters = data
-        for(var i=0;i < characters.length; i++){
-            var newButton = document.createElement("button")
+        for(var i=0;i < 5; i++){
+            var newButton = document.querySelector('#option' + i)
             newButton.innerText=characters[i].name 
-            chrButtons.push(newButton)
-            document.body.appendChild(newButton)
             newButton.addEventListener("click", startDialog)
         }
     })
+}
+
+showNPCButton.addEventListener('click', showNPCs)

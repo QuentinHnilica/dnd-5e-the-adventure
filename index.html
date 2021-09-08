@@ -1,34 +1,217 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- THIS IS THE TITLE -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DND</title>
-  </head> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
   <body>
-    <p style="padding: 10px; border: 2px solid rgb(252, 249, 249);"> </p>
+    
     <header>
-    <H1>     
-    <center>
-      Dungeons & Dragons </center>
-    </H1>
-    </header>
-    <div class="start_btn"><button>Start Game</button></div>
-    <!-- Info Box for rules of the quiz-->
-    <div class="info_box">
-      <div class="info_title">
-        <span>Some Rules of the Game</span>
-      </div>
-      <div>
-        <div class="info"></div>
-        1.You will soon see some more rules
-      </div> <div class="container">
-        <div class="notification is-primary">
-         
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <p>Dungeons & Dragons 5E</p> <!-- changeto an image later -->
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="dialog.html">
+              dialog
+            </a>
+      
+            <a class="navbar-item" href="battle.html">
+              Battle
+            </a>
+
+            <a class="navbar-item" href="map.html">
+              map
+            </a>
+            <a class="navbar-item" href="index.html">
+              home
+            </a>
+      
+            
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="columns dialog-container">
+      <div class="column is-1">
+      </div>
+      <div class="column is-7" style="border: black solid;" id="mainBox">
+          <div class="start">
+            <button id="start-Button" class="button is-primary">Start Game</button>
+          </div>
+          
+          <div class="columns dialogOptions">
+            
+          </div>
+      </div>
+
+      <div class="column is-2 is-offset-1" style="border: black solid;"> 
+          
+      </div>
+    </div>
+
+    <div class="colums">
+      <div class="column is-2 is-offset-9" style="text-align: center;">
+        <button class="button is-primary" id="showList">Talk To NPC's</button>
+        <button class="button is-primary" id="showMap" style="margin-top: 2%;">Show Map</button>
+        <button class="button is-primary" id="viewChar" style="margin-top: 2%;">View Character</button>
+      </div>
+    </div>
+
+
+
+    <div class="modal" id="charMod">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Create Character</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="select">
+            <select id="races">
+            </select>
+          </div>
+          <div class="select">
+            <select id="classes">
+            </select>
+          </div>
+          <input type="text" class="input is-primary" style="margin-top: 1%;" placeholder="Characters Name" id="myName">
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="finished">Finished</button>
+        </footer>
+      </div>
+    </div>
+
+    <div class="modal" id="dialogMod">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">NPC's</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <button class="button is-primary" id="option0"></button>
+          <button class="button is-primary" id="option1"></button>
+          <button class="button is-primary" id="option2"></button>
+          <button class="button is-primary" id="option3"></button>
+          <button class="button is-primary" id="option4"></button>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="Close">Close</button>
+        </footer>
+      </div>
+    </div>
+
+    <div class="modal" id="mapMod">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">NPC's</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <button class="button is-primary" id="town1"></button>
+          <button class="button is-primary" id="town2"></button>
+          <button class="button is-primary" id="dungeon"></button>
+
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="Close">Close</button>
+        </footer>
+      </div>
+    </div>
+
+    <div class="modal" id="charSheet">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Character Sheet</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img src="assets/imgs/Barbarian.png" alt="Placeholder image">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4" id="charName" style="text-align: center;"></p>
+                </div>
+              </div>
+              <div class="content">
+                <div class="columns" style="margin-top: 2%;">
+                  <div class="column is-1" style="border: black solid 2px; text-align: center;">
+                    <p>Str</p>
+                    <hr>
+                    <p>Dex</p>
+                    <hr>
+                    <p>Con</p>
+                    <hr>
+                    <p>Int</p>
+                    <hr>
+                    <p>Wis</p>
+                    <hr>
+                    <p>Char</p>
+                    <hr>
+                  </div>
+                  <div class="column is-1" style="border: black solid 2px; text-align: center;" id="myScores">
+                    <p id="str"></p>
+                    <hr>
+                    <p id="dex">Dex</p>
+                    <hr>
+                    <p id="con">Con</p>
+                    <hr>
+                    <p id="int">Int</p>
+                    <hr>
+                    <p id="wis">Wis</p>
+                    <hr>
+                    <p id="char">Char</p>
+                    <hr>
+                  </div>
+                  <div class="column is-10" style="border: black solid 2px;">
+                    <p id="init">Initive</p>
+                    <hr>
+                    <p id="hp">HP</p>
+                    <hr>
+                    <p style="text-align: center; font-weight: bold;">Moves</p>
+                    <hr>
+                    <p id="move1"></p>
+                    <hr>
+                    <p id="move2"></p>
+                    <hr>
+                    <p id="move3"></p>
+                    <hr>
+                    <p id="move4"></p>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="Close">Close</button>
+        </footer>
       </div>
     </div>
 
