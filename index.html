@@ -79,7 +79,7 @@
       <div class="modal-card">
         <header class="modal-card-head">
           <p class="modal-card-title">Create Character</p>
-          <button class="delete" aria-label="close"></button>
+          <button class="delete" aria-label="close" id="closeCharCreate"></button>
         </header>
         <section class="modal-card-body">
           <div class="select">
@@ -103,7 +103,7 @@
       <div class="modal-card">
         <header class="modal-card-head">
           <p class="modal-card-title">NPC's</p>
-          <button class="delete" aria-label="close"></button>
+          <button class="delete" aria-label="close" id="closeDialogOptions"></button>
         </header>
         <section class="modal-card-body">
           <button class="button is-primary" id="option0"></button>
@@ -123,12 +123,12 @@
       <div class="modal-card">
         <header class="modal-card-head">
           <p class="modal-card-title">NPC's</p>
-          <button class="delete" aria-label="close"></button>
+          <button class="delete" aria-label="close" id="closeMapMod"></button>
         </header>
         <section class="modal-card-body">
-          <button class="button is-primary" id="town1"></button>
-          <button class="button is-primary" id="town2"></button>
-          <button class="button is-primary" id="dungeon"></button>
+          <button class="button is-primary" id="town1">town1</button>
+          <button class="button is-primary" id="town2">town2</button>
+          <button class="button is-primary" id="dungeon">dungeon</button>
 
         </section>
         <footer class="modal-card-foot">
@@ -142,7 +142,7 @@
       <div class="modal-card">
         <header class="modal-card-head">
           <p class="modal-card-title">Character Sheet</p>
-          <button class="delete" aria-label="close"></button>
+          <button class="delete" aria-label="close" id="closeCharSheet"></button>
         </header>
         <section class="modal-card-body">
           <div class="card">
@@ -207,11 +207,78 @@
               </div>
             </div>
           </div>
-
         </section>
-        <footer class="modal-card-foot">
-          <button class="button is-success" id="Close">Close</button>
-        </footer>
+      </div>
+    </div>
+
+
+    <div class="modal" id="objective">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Game Objective</p>
+          <button class="delete" aria-label="close" id="closeObjective"></button>
+        </header>
+        <section class="modal-card-body">
+          <p>
+            The Objective of the game is to defeat the boss on floor 5 of the dungeon with the least amount of deaths.
+            Each death will be recorded. When you are defeated, the people of the land will give you extra power to help you 
+            with your journey. Try talking to them before you're ready to try again.
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <div class="modal" id="battleInfo">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">How to fight</p>
+          <button class="delete" aria-label="close" id="closeBattleInfo"></button>
+        </header>
+        <section class="modal-card-body">
+          <p>
+            You are given 4 abilities to defeat your enemies. Check out your character sheet to see their descriptions! Once you have
+            entered a battle, click on the enemy you want to attack and choose the ability to hit them with. Some abilities don't
+            do any damage, these are status affect moves. They give you buffs to your character for a limited amount of turns, or for 
+            the entire battle. Each class has an ultimate ability that can be used once per battle. This ability will always be the 
+            fourth on your bar
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <div class="modal" id="mapHelp">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Your Map</p>
+          <button class="delete" aria-label="close" id="closeMapHelp"></button>
+        </header>
+        <section class="modal-card-body">
+          <p>
+            When you open your map you'll be given 3 places you can go to, two of them are towns with characters who can help you get
+            stronger, the third option is the dungeon. Click on the dungeon when you're ready to give it your all.
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <div class="modal" id="dialogHelp">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Dialog Help</p>
+          <button class="delete" aria-label="close" id="closeDialogHelp"></button>
+        </header>
+        <section class="modal-card-body">
+          <p>
+            These characters are here to help you along your journey. Each time you are defeated one of these characters will give you
+            a buff for your next run. To access these characters, open your map and go to a town. You will be given a list of all the 
+            characters and ask them for help. If they say they can't help you then go back to them again when you have died a few more
+            times. 
+          </p>
+        </section>
       </div>
     </div>
 

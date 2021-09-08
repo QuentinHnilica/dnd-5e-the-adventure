@@ -44,10 +44,12 @@ var barbUlt
 
 var thePTag
 
+var currentFloor = 1
 function rollInitiative(){ //find turn rotation
     var turnRotation = []
     for (var i = 0; i < amtOfEnemies; i++){
-        roll = {
+        console.log(enemiesToFight[i])
+        roll = {         
             enemy: enemiesToFight[i],
             thierRoll: Math.floor(Math.random() * (21 - 1) + 1) + enemiesToFight[i].initiative
         }
@@ -64,15 +66,22 @@ function rollInitiative(){ //find turn rotation
 }
 
 function battleOver(){
-    armorUPBuff(false)
-    canUseAU = true
-    isRaged = false
-    chargeActive = false
-    shieldCount = 1
-    activeShield = false
-    destroyContent()
-    dialogContent()
-    console.log("battleOver")
+    if (currentFloor < 5){
+        armorUPBuff(false)
+        canUlt = true
+        canUseAU = true
+        isRaged = false
+        chargeActive = false
+        shieldCount = 1
+        activeShield = false
+        currentFloor++
+        turn = 0
+        destroyContent()
+        battleStart()
+    }
+    else{
+        youWin(myChar)
+    }
 }
 
 
@@ -306,6 +315,9 @@ function useMove(e){
                     }   
                 }        
             }
+            else{
+                thePTag.innerText = 'Select a target'
+            }
         }  
         else{
             if (canUlt){
@@ -369,55 +381,96 @@ function destroyExtraButtons(buttonsToKill){
 }
 
 function battleStart(){
-    battleContent()
+    battleContent(currentFloor)
     destroyButtArr = []
+    enemiesToFight = []
     thePTag = document.querySelector('#battleText')
-    amtOfEnemies = Math.floor(Math.random() * (4 - 1) + 1) //chooses 1 - 3 enemies for the player to fight
-    if (amtOfEnemies === 1){
+    var newEnemy
+    if (currentFloor < 5){
+        amtOfEnemies = Math.floor(Math.random() * (4 - 1) + 1) //chooses 1 - 3 enemies for the player to fight
+        if (amtOfEnemies === 1){
+            button0 = document.getElementById('enemy2')
+            button1 = document.getElementById('enemy1')
+            button2 = document.getElementById('enemy3')
+            destroyButtArr.push(button1)
+            destroyButtArr.push(button2)
+            destroyExtraButtons(destroyButtArr)
+        }
+        else if( amtOfEnemies === 2){
+            button0 = document.getElementById('enemy1')
+            button1 = document.getElementById('enemy3')
+            button2 = document.getElementById('enemy2')
+            destroyButtArr.push(button2)
+            destroyExtraButtons(destroyButtArr)
+        }
+        else{
+            button0 = document.getElementById('enemy1')
+            button1 = document.getElementById('enemy2')
+            button2 = document.getElementById('enemy3')
+        }
+        for (var i = 0; i < amtOfEnemies; i++){
+            if (currentFloor === 1){
+                newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
+                newEnemy.name = 'testDummy' + (i + 1)
+                enemiesToFight[i] = newEnemy
+            }
+            else if(currentFloor === 2){
+                newEnemy = { ...testDummy } //change from testDummy
+                newEnemy.name = 'testDummy' + (i + 1)
+                enemiesToFight[i] = newEnemy
+            }
+            else if(currentFloor === 3){
+                newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
+                newEnemy.name = 'testDummy' + (i + 1)
+                enemiesToFight[i] = newEnemy
+            }
+            else{
+                newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
+                newEnemy.name = 'testDummy' + (i + 1)
+                enemiesToFight[i] = newEnemy
+            }
+            
+            if (i === 0){
+                button0.firstChild.innerText = newEnemy.name
+                button0.lastChild.innerText = newEnemy.hp
+                button0.firstChild.addEventListener('click', setTarget)
+            }
+            else if(i === 1){
+                button1.firstChild.innerText = newEnemy.name
+                button1.lastChild.innerText = newEnemy.hp
+                button1.firstChild.addEventListener('click', setTarget)
+            }
+            else{
+                button2.firstChild.innerText = newEnemy.name
+                button2.lastChild.innerText = newEnemy.hp
+                button2.firstChild.addEventListener('click', setTarget)
+            }
+        }
+    }
+    else{
+        amtOfEnemies = 1
         button0 = document.getElementById('enemy2')
         button1 = document.getElementById('enemy1')
         button2 = document.getElementById('enemy3')
         destroyButtArr.push(button1)
         destroyButtArr.push(button2)
         destroyExtraButtons(destroyButtArr)
+
+        newEnemy = { ...testDummy } //Make this the boss
+        newEnemy.name = 'testDummy' + 1 //change to bosses name
+        enemiesToFight.push(newEnemy)
+
+        button0.firstChild.innerText = newEnemy.name
+        button0.lastChild.innerText = newEnemy.hp
+        button0.firstChild.addEventListener('click', setTarget)
     }
-    else if( amtOfEnemies === 2){
-        button0 = document.getElementById('enemy1')
-        button1 = document.getElementById('enemy3')
-        button2 = document.getElementById('enemy2')
-        destroyButtArr.push(button2)
-        destroyExtraButtons(destroyButtArr)
-    }
-    else{
-        button0 = document.getElementById('enemy1')
-        button1 = document.getElementById('enemy2')
-        button2 = document.getElementById('enemy3')
-    }
-    for (var i = 0; i < amtOfEnemies; i++){
-        var newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
-        newEnemy.name = 'testDummy' + (i + 1)
-        enemiesToFight[i] = newEnemy
-        if (i === 0){
-            button0.firstChild.innerText = newEnemy.name
-            button0.lastChild.innerText = newEnemy.hp
-            button0.firstChild.addEventListener('click', setTarget)
-        }
-        else if(i === 1){
-            button1.firstChild.innerText = newEnemy.name
-            button1.lastChild.innerText = newEnemy.hp
-            button1.firstChild.addEventListener('click', setTarget)
-        }
-        else{
-            button2.firstChild.innerText = newEnemy.name
-            button2.lastChild.innerText = newEnemy.hp
-            button2.firstChild.addEventListener('click', setTarget)
-        }
-    }
+    
     for (var o = 0; o < myChar.attacks.length; o++){
         var newButton = document.querySelector('#attack' + o)
         newButton.innerText = myChar.attacks[o].name
         newButton.addEventListener('click', useMove)
     }
+    console.log(enemiesToFight)
     turnOrder = rollInitiative()
     battleLogic()
 }
