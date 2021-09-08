@@ -1,7 +1,7 @@
 var characters = []
 var chrButtons =[]
 var pEl
-var buttonText =["quest","nice","mean","goodby"]
+var buttonText =["buff","nice","mean","goodby"]
 var thisObject
 var showNPCButton = document.querySelector('#showList')
 var modelNpc = document.querySelector('#dialogMod')
@@ -23,9 +23,30 @@ function displayText(e){
             destroyContent()
             startScreen()
         }, 1500);
-
-        
-
+    }
+    else{
+        if (thisObject.npcNum <= myChar.deaths){
+            console.log(myChar)
+            pEl.innerText = thisObject.hasBuff
+            var theBuff = thisObject.theBuff.replace(/[^a-zA-Z]/g,"")
+            var stat = thisObject.theBuff.replace(/\D/g,'')
+            var actualStat = Number(stat)
+            if (theBuff === 'ac'){
+                myChar.ac += actualStat
+            }
+            else if(theBuff === 'maxHP'){
+                myChar.maxHP += actualStat
+            }
+            else{
+                myChar.initiative += actualStat
+            }
+            console.log(theBuff,stat)
+            myChar.actualBuff += stat
+            console.log(myChar)
+        }
+        else{
+            pEl.innerText = thisObject.noBuff
+        }
     }
 
 }
