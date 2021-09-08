@@ -1,5 +1,7 @@
 var mainBox = document.querySelector('#mainBox')
 
+var deathRuns
+
 function destroyContent(){
     mainBox.innerHTML = ''
 }
@@ -13,20 +15,7 @@ function dialogContent(){
     newP.id = 'response'
     newDiv.appendChild(newP)
 
-{/* <div class="columns dialogOptions">
-                    <div class="column is-3 ">
-                        <button class="button is-primary">Quest</button>
-                    </div>
-                    <div class="column is-3 ">
-                        <button class="button is-primary">Be Nice</button>
-                    </div>
-                    <div class="column is-3 ">
-                        <button class="button is-primary">Be Mean</button>
-                    </div>
-                    <div class="column is-3 ">
-                        <button class="button is-primary">GoodBye</button>
-                    </div>
-                </div> */}
+
     var dialogButtonDiv = document.createElement('div')
     dialogButtonDiv.classList.add('columns')
     dialogButtonDiv.classList.add('dialogOptions')
@@ -44,7 +33,7 @@ function dialogContent(){
     }
 }
 
-function battleContent(){
+function battleContent(currentFloor){
     //All of the Enemy Buttons
     var newDiv = document.createElement('div')
     mainBox.appendChild(newDiv)
@@ -96,6 +85,9 @@ function battleContent(){
     var textP = document.createElement('p')
     textP.id = 'battleText'
     textDiv.appendChild(textP)
+    var floorP = document.createElement('p')
+    floorP.innerText = 'floor: ' + currentFloor
+    textDiv.appendChild(floorP)
     //Player Move Buttons
 
     var dialogDiv = document.createElement('div')
@@ -150,6 +142,109 @@ function battleContent(){
    
 }
 
-function mapContent(){
+function startScreen(){
+    destroyContent()
 
+    var startText = document.createElement('p')
+    startText.innerText = 'Open Your Map to select where to go'
+    startText.style = 'font-weight: bold; font-size: 30px;'
+    mainBox.appendChild(startText)
+
+
+    var dialogButtonDiv = document.createElement('div')
+    dialogButtonDiv.classList.add('columns')
+    dialogButtonDiv.classList.add('dialogOptions')
+    mainBox.appendChild(dialogButtonDiv)
+}
+
+function showMod(e){
+    console.log(e)
+    var thisMod = document.querySelector('#' + e.target.accessKey) 
+    thisMod.classList.add('is-active')
+}
+
+
+function howToPlay(){
+    var startGameButton = document.createElement('button')
+    startGameButton.classList.add('button')
+    startGameButton.classList.add('is-primary')
+    startGameButton.innerText = 'Begin Journey'
+    startGameButton.id = 'beginJourney'
+    mainBox.appendChild(startGameButton)
+    var dialogButtonDiv = document.createElement('div')
+    dialogButtonDiv.classList.add('columns')
+    dialogButtonDiv.classList.add('dialogOptions')
+    mainBox.appendChild(dialogButtonDiv)
+    
+    for (var i = 0; i < 4; i++){
+        var divColumn = document.createElement('div')
+        divColumn.classList.add('column')
+        divColumn.classList.add('is-3')
+        dialogButtonDiv.appendChild(divColumn)
+        var newButton = document.createElement('button')
+        newButton.classList.add('button')
+        newButton.classList.add('is-primary')
+        newButton.id = 'question' + i
+        newButton.style = 'width: 100%'
+        newButton.addEventListener('click', showMod)
+        divColumn.appendChild(newButton)
+    }
+    document.querySelector('#question0').innerText = 'Game Objective'
+    document.querySelector('#question0').accessKey = 'objective'
+    document.querySelector('#question1').innerText = 'Battles'
+    document.querySelector('#question1').accessKey = 'battleInfo'
+    document.querySelector('#question2').innerText = 'My Map'
+    document.querySelector('#question2').accessKey = 'mapHelp'
+    document.querySelector('#question3').innerText = 'NPC Interaction'
+    document.querySelector('#question3').accessKey = 'dialogHelp'
+    
+}
+
+function startTutorial(){
+    var dialogDiv = document.createElement('div')
+    dialogDiv.classList.add('columns')
+    dialogDiv.classList.add('dialogOptions')
+    dialogDiv.style = 'justify-content: center;'
+    mainBox.appendChild(dialogDiv)
+    var startTutButton = document.createElement('button')
+    startTutButton.innerText = 'How To Play'
+    startTutButton.id = 'startTut'
+    startTutButton.classList.add('button')
+    startTutButton.classList.add('is-primary')
+    startTutButton.style = 'margin-right: 1%; margin-bottom: 20%'
+    dialogDiv.appendChild(startTutButton)
+
+    var skipTutButton = document.createElement('button')
+    skipTutButton.innerText = 'Begin Your Adventure'
+    skipTutButton.id = 'skipTut'
+    skipTutButton.classList.add('button')
+    skipTutButton.classList.add('is-primary')
+    skipTutButton.style = 'margin-left: 1%; margin-bottom: 20%'
+    dialogDiv.appendChild(skipTutButton)
+}
+
+function saveStats(){
+    //local Storage Stats
+    console.log(deathRuns)
+}
+
+function youWin(charStats){
+    destroyContent()
+    deathRuns = charStats.deaths
+    var startText = document.createElement('p')
+    startText.innerText = 'Congrats You Won!'
+    startText.style = 'font-weight: bold; font-size: 30px;'
+    mainBox.appendChild(startText)
+    var saveWinsButton = document.createElement('button')
+    saveWinsButton.classList.add('button')
+    saveWinsButton.classList.add('is-primary')
+    saveWinsButton.innerText = 'Save Your Score'
+    mainBox.appendChild(saveWinsButton)
+    saveWinsButton.addEventListener('click', saveStats)
+
+
+    var dialogButtonDiv = document.createElement('div')
+    dialogButtonDiv.classList.add('columns')
+    dialogButtonDiv.classList.add('dialogOptions')
+    mainBox.appendChild(dialogButtonDiv)
 }

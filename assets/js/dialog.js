@@ -5,6 +5,7 @@ var buttonText =["quest","nice","mean","goodby"]
 var thisObject
 var showNPCButton = document.querySelector('#showList')
 var modelNpc = document.querySelector('#dialogMod')
+var inTown1 = true
 function displayText(e){
     var myResponse =e.target.innerText
     if(myResponse === "nice"){
@@ -20,6 +21,7 @@ function displayText(e){
             console.log("this is a one Second Wait")
             clearInterval(waitTimer)
             destroyContent()
+            startScreen()
         }, 1500);
 
         
@@ -50,11 +52,22 @@ function showNPCs(){
     })
     .then(function (data) {
         characters = data
-        for(var i=0;i < 5; i++){
-            var newButton = document.querySelector('#option' + i)
-            newButton.innerText=characters[i].name 
-            newButton.addEventListener("click", startDialog)
+        console.log(data)
+        if (inTown1){
+            for(var i=0;i < 5; i++){
+                var newButton = document.querySelector('#option' + i)
+                newButton.innerText=characters[i].name 
+                newButton.addEventListener("click", startDialog)
+            }
         }
+        else{
+            for(var i=0;i < 5; i++){
+                var newButton = document.querySelector('#option' + i)
+                newButton.innerText=characters[i + 5].name 
+                newButton.addEventListener("click", startDialog)
+            }
+        }
+        
     })
 }
 
