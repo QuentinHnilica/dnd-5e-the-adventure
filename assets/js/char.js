@@ -188,7 +188,7 @@ function pickSpells(){
         myChar.ac = 15
         myChar.stats = stats
     }
-    myChar.deaths = 0
+    myChar.deaths = 10
     myChar.name = nameBox.value
     makeCharSheet()
     startBattle = true;
@@ -204,7 +204,9 @@ function applyDamage(amt, bool){
         if (myChar.currHP <= 0){
             console.log('you die')
             playerDead = true;
+            myChar.deaths++
         }
+        playerDead = false;
     }
     else{
         myChar.currHP += amt

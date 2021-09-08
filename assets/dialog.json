@@ -4,28 +4,48 @@
         "greet": "Hello how are you",
         "goodby":"See ya latter",
         "nice":  "Thank you darling",
-        "mean":   "How dare you!"
+        "mean":   "How dare you!",
+        "hasBuff": "Take this power",
+        "noBuff": "Come Back Later",
+        "npcNum": 10,
+        "theBuff": "maxHP4",
+        "buffGiven": false
     },
     {
         "name":"Alice",
         "greet": "Hello my adventurer",
         "goodby":"Farewll my gallent friend",
         "nice":  "It has been my pleasure to meet you",
-        "mean":  "I dont ever want to see you again"
+        "mean":  "I dont ever want to see you again",
+        "hasBuff": "I give this to you",
+        "noBuff": "I'm sure you're fine..",
+        "npcNum": 4,
+        "theBuff": "maxHP4",
+        "buffGiven": false
     },
     {
         "name":  "Thomas",
         "greet" : "Hail fellow",
         "goodby": "fare thee well ",
         "nice":   "I see the finest in thee",
-        "mean":   "your a crooked nose knave"
+        "mean":   "your a crooked nose knave",
+        "hasBuff": "Use this power for good",
+        "noBuff": "You haven't even tried",
+        "npcNum": 2,
+        "theBuff": "ac2",
+        "buffGiven": false
     },
     {   
         "name":    "Isabella", 
         "greet":    "Mine own hearts root",
         "goodby":   "I shall see you anon",
         "nice":     "Well met",
-        "mean":      "you pig-snotted cod peice"
+        "mean":      "you pig-snotted cod peice",
+        "hasBuff": "Be responsible with this",
+        "noBuff": "No way",
+        "npcNum": 5,
+        "theBuff": "ac2",
+        "buffGiven": false
     },
 
     {
@@ -33,14 +53,24 @@
         "greet":      "How fare thee",
         "goodby":     "Fare thee well I must away",
         "nice":        "Good health be yours",
-        "mean":       "leave me you fool-born puss filled peasant"
+        "mean":       "leave me you fool-born puss filled peasant",
+        "hasBuff": "Protect us",
+        "noBuff": "You are not worthy",
+        "npcNum": 1,
+        "theBuff": "maxHP4",
+        "buffGiven": false
     },    
     {   
         "name":          "Emma",
         "greet":         "Good Morrow",
         "goodby":        "go thy way ",
         "nice":         "How fare thee my good friend",
-        "mean":         "You treachrous villianous villiage idiot"
+        "mean":         "You treachrous villianous villiage idiot",
+        "hasBuff": "I believe in you",
+        "noBuff": "I do not believe in you",
+        "npcNum": 3,
+        "theBuff": "initiative2",
+        "buffGiven": false
     },
 
   
@@ -49,14 +79,24 @@
         "greet":      "How now",  
         "goodby":     "farewell",
         "nice":       "I owe my good fortune to you",
-        "mean":      "You are a rude son of a scullery maid"
+        "mean":      "You are a rude son of a scullery maid",
+        "hasBuff": "You may now stand a chance",
+        "noBuff": "You stand no chance",
+        "npcNum": 8,
+        "theBuff": "ac2",
+        "buffGiven": false
     },
     {
         "name":      "Joan",
         "greet":     "Good day",
         "goodby":    "Walk every with care",
         "nice":      "I will always remember your favorable assistance",
-        "mean":      "Do not speak to me you vomit eating soulless peon"
+        "mean":      "Do not speak to me you vomit eating soulless peon",
+        "hasBuff": "Go forth, defeat evil",
+        "noBuff": "Why waste my time with you?",
+        "npcNum": 7,
+        "theBuff": "maxHP4",
+        "buffGiven": false
 
     },
     {
@@ -64,13 +104,23 @@
         "greet":        "Hail well met",
         "goodby":       "To all I bid good night", 
         "nice":         "Never have I met a finer person",
-        "mean":         "your ill-mannered currish buffoon friend must leave"
+        "mean":         "your ill-mannered currish buffoon friend must leave",
+        "hasBuff": "Help us like I helped you",
+        "noBuff": "try again, then talk to me",
+        "npcNum": 6,
+        "theBuff": "initiative2",
+        "buffGiven": false
     },
     {
         "name":        "Agnes",
         "greet":       "Very good to see you",
         "goodby":      "May the wind always be at your back and the sun always shine on you",
         "nice":        "You are head shoulder above the rest",
-        "mean":        "Even Satan is scared of you"
+        "mean":        "Even Satan is scared of you",
+        "hasBuff": "You are now more powerful",
+        "noBuff": "You need to be more powerful",
+        "npcNum": 9,
+        "theBuff": "initiative2",
+        "buffGiven": false
     }
 ]

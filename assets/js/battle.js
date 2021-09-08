@@ -6,7 +6,92 @@ var testDummy = {
         }
     ],
     ac: 10,
+    hp: 4,
+    initiative: 2, 
+    stats: {
+        str : 3,
+        dex : 5,
+        con : -1,
+        int : 0,
+        wis : 4,
+        char : 1
+    },
+    isDead: false
+}
+
+var caveBadger = {
+    dummyAttacks : [
+        basicAttack = {
+            damage : 2,
+            atkNum : 1
+        }
+    ],
+    ac: 10,
+    hp: 6,
+    initiative: 2, 
+    stats: {
+        str : 3,
+        dex : 5,
+        con : -1,
+        int : 0,
+        wis : 4,
+        char : 1
+    },
+    isDead: false
+}
+
+var giantCrab = {
+    dummyAttacks : [
+        basicAttack = {
+            damage : 3,
+            atkNum : 1
+        }
+    ],
+    ac: 10,
+    hp: 8,
+    initiative: 2, 
+    stats: {
+        str : 3,
+        dex : 5,
+        con : -1,
+        int : 0,
+        wis : 4,
+        char : 1
+    },
+    isDead: false
+}
+var battleforceAngel = {
+    dummyAttacks : [
+        basicAttack = {
+            damage : 4,
+            atkNum : 1
+        }
+    ],
+    ac: 10,
     hp: 10,
+    initiative: 2, 
+    stats: {
+        str : 3,
+        dex : 5,
+        con : -1,
+        int : 0,
+        wis : 4,
+        char : 1
+    },
+    isDead: false
+}
+
+
+
+var ancientCopperDragon  = {
+    dummyAttacks : [
+        basicAttack = {
+            damage : 8,
+            atkNum : 1
+        }
+    ],
+    ac: 11,
+    hp: 30,
     initiative: 2, 
     stats: {
         str : 3,
@@ -212,28 +297,30 @@ function getTargets(targetAmt , theMove){
 }
 
 function executeUlt(){
-    if(myTarget.isDead === false){
-        var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
-        if (diceRoll >= myTarget.ac){
-            myTarget.hp -= barbUlt.damage + 5
-            if(myTarget.hp > 0){
-                executeAgain = false
-                battleLogic()
-                console.log('didnt kill')
+    if (myTarget != null){
+        if(myTarget.isDead === false){
+            var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
+            if (diceRoll >= myTarget.ac){
+                myTarget.hp -= barbUlt.damage + 5
+                if(myTarget.hp > 0){
+                    executeAgain = false
+                    battleLogic()
+                    console.log('didnt kill')
+                }
+                else{
+                    console.log('did kill')
+                    myTarget.isDead = true
+                }
+        
+                var gameOver = checkForDeath()
+                if (gameOver){
+                    battleOver()
+                }
             }
             else{
-                console.log('did kill')
-                myTarget.isDead = true
+                executeAgain = false
+                battleLogic()
             }
-    
-            var gameOver = checkForDeath()
-            if (gameOver){
-                battleOver()
-            }
-        }
-        else{
-            executeAgain = false
-            battleLogic()
         }
     }
 }
@@ -415,18 +502,18 @@ function battleStart(){
                 enemiesToFight[i] = newEnemy
             }
             else if(currentFloor === 2){
-                newEnemy = { ...testDummy } //change from testDummy
-                newEnemy.name = 'testDummy' + (i + 1)
+                newEnemy = { ...caveBadger } //change from testDummy
+                newEnemy.name = 'cave Badger' + (i + 1)
                 enemiesToFight[i] = newEnemy
             }
             else if(currentFloor === 3){
-                newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
-                newEnemy.name = 'testDummy' + (i + 1)
+                newEnemy = { ...giantCrab } //Make a table of enemies and choose a random one
+                newEnemy.name = 'Giant Crab' + (i + 1)
                 enemiesToFight[i] = newEnemy
             }
             else{
-                newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
-                newEnemy.name = 'testDummy' + (i + 1)
+                newEnemy = { ...battleforceAngel } //Make a table of enemies and choose a random one
+                newEnemy.name = 'Battleforce Angel' + (i + 1)
                 enemiesToFight[i] = newEnemy
             }
             
@@ -456,8 +543,8 @@ function battleStart(){
         destroyButtArr.push(button2)
         destroyExtraButtons(destroyButtArr)
 
-        newEnemy = { ...testDummy } //Make this the boss
-        newEnemy.name = 'testDummy' + 1 //change to bosses name
+        newEnemy = { ...ancientCopperDragon} //Make this the boss
+        newEnemy.name = 'Ancient Copper Dragon' //change to bosses name
         enemiesToFight.push(newEnemy)
 
         button0.firstChild.innerText = newEnemy.name
