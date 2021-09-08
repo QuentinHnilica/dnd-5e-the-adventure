@@ -51,7 +51,7 @@ fetch(startUrl).then(function(response){
 })
 
 function startDungeon(){
-    destroyContent()
+    destroyContent() //called in html-handler.js
     battleStart()
 }
 

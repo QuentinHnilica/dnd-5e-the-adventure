@@ -9,7 +9,8 @@
         "noBuff": "Come Back Later",
         "npcNum": 10,
         "theBuff": "maxHP4",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
     },
     {
         "name":"Alice",
@@ -21,7 +22,8 @@
         "noBuff": "I'm sure you're fine..",
         "npcNum": 4,
         "theBuff": "maxHP4",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
     },
     {
         "name":  "Thomas",
@@ -33,7 +35,8 @@
         "noBuff": "You haven't even tried",
         "npcNum": 2,
         "theBuff": "ac2",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
     },
     {   
         "name":    "Isabella", 
@@ -45,7 +48,8 @@
         "noBuff": "No way",
         "npcNum": 5,
         "theBuff": "ac2",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
     },
 
     {
@@ -58,7 +62,8 @@
         "noBuff": "You are not worthy",
         "npcNum": 1,
         "theBuff": "maxHP4",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
     },    
     {   
         "name":          "Emma",
@@ -70,7 +75,8 @@
         "noBuff": "I do not believe in you",
         "npcNum": 3,
         "theBuff": "initiative2",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
     },
 
   
@@ -84,7 +90,8 @@
         "noBuff": "You stand no chance",
         "npcNum": 8,
         "theBuff": "ac2",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
     },
     {
         "name":      "Joan",
@@ -96,7 +103,8 @@
         "noBuff": "Why waste my time with you?",
         "npcNum": 7,
         "theBuff": "maxHP4",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
 
     },
     {
@@ -109,7 +117,8 @@
         "noBuff": "try again, then talk to me",
         "npcNum": 6,
         "theBuff": "initiative2",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
     },
     {
         "name":        "Agnes",
@@ -121,6 +130,7 @@
         "noBuff": "You need to be more powerful",
         "npcNum": 9,
         "theBuff": "initiative2",
-        "buffGiven": false
+        "buffGiven": false,
+        "alreadyGiven": "I've Given all I can"
     }
 ]

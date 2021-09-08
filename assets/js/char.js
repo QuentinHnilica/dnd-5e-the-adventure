@@ -188,7 +188,7 @@ function pickSpells(){
         myChar.ac = 15
         myChar.stats = stats
     }
-    myChar.deaths = 10
+    myChar.deaths = 0
     myChar.name = nameBox.value
     makeCharSheet()
     startBattle = true;
