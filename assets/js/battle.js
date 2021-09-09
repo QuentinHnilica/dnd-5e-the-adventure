@@ -219,7 +219,7 @@ function battleLogic(){ //this is where the battle code is. Also, the var turn i
         if(turnOrder[turn].enemy.isDead == false){
             var myAttack = turnOrder[turn].enemy.dummyAttacks[0]
             myRoll = Math.floor(Math.random() * (21 -1 ) + 1) + turnOrder[turn].enemy.stats.str
-            if (myRoll > myChar.ac){
+            if (myRoll > myChar.ac && playerDead === false){
                 //do damage
                 if (activeShield === false){
                     applyDamage(turnOrder[turn].enemy.dummyAttacks[0].damage, true)
@@ -304,6 +304,7 @@ function executeUlt(){
                 myTarget.hp -= barbUlt.damage + 5
                 if(myTarget.hp > 0){
                     executeAgain = false
+                    playersTurn = false
                     battleLogic()
                     console.log('didnt kill')
                 }
@@ -318,6 +319,7 @@ function executeUlt(){
                 }
             }
             else{
+                playersTurn = false
                 executeAgain = false
                 battleLogic()
             }

@@ -50,7 +50,8 @@ fetch(startUrl).then(function(response){
     })
 })
 
-function startDungeon(){
+function startDungeon(e){
+    e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
     destroyContent() //called in html-handler.js
     battleStart()
 }
