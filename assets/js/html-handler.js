@@ -1,5 +1,4 @@
 var mainBox = document.querySelector('#mainBox')
-
 var deathRuns
 var charName
 
@@ -330,8 +329,5 @@ function closeLeaderBoard(){
 }
 
 
-
-function soundEffectApi(){
-    
-}
 closeLeaderMod.addEventListener('click', closeLeaderBoard)
+
