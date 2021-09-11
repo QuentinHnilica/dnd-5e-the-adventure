@@ -6,6 +6,7 @@ var thisObject
 var showNPCButton = document.querySelector('#showList')
 var modelNpc = document.querySelector('#dialogMod')
 var inTown1 = true
+// non player character responses
 function displayText(e){
     var myResponse =e.target.innerText
     if(myResponse === "nice"){
@@ -24,6 +25,7 @@ function displayText(e){
             startScreen()
         }, 1500);
     }
+    //
     else{
         if (thisObject.npcNum <= myChar.deaths){
             if(thisObject.buffGiven === false){
@@ -54,10 +56,11 @@ function displayText(e){
     }
 
 }
+// start non player character dialog
 function startDialog(e){
     modelNpc.classList.remove('is-active')
     var thisCharacter=e.target.innerText
-    destroyContent()
+    destroyContent()//nested in the html-handler.js
     dialogContent()
     pEl=document.querySelector('#response')
     thisObject=search(thisCharacter,characters)
@@ -69,31 +72,32 @@ function startDialog(e){
 
     }
 }
+// show non player character
 function showNPCs(){
+    if (inTown1){
+        for(var i=0;i < 5; i++){
+            var newButton = document.querySelector('#option' + i)
+            newButton.innerText=characters[i].name 
+            newButton.addEventListener("click", startDialog)
+        }
+    }
+    else{
+        for(var i=0;i < 5; i++){
+            var newButton = document.querySelector('#option' + i)
+            newButton.innerText=characters[i + 5].name 
+            newButton.addEventListener("click", startDialog)
+        }
+    }
     modelNpc.classList.add('is-active')
-    fetch('./assets/dialog.json')
+    
+}
+
+fetch('./assets/dialog.json')
     .then(function (response) {
         return response.json()
     })
     .then(function (data) {
-        characters = data
-        console.log(data)
-        if (inTown1){
-            for(var i=0;i < 5; i++){
-                var newButton = document.querySelector('#option' + i)
-                newButton.innerText=characters[i].name 
-                newButton.addEventListener("click", startDialog)
-            }
-        }
-        else{
-            for(var i=0;i < 5; i++){
-                var newButton = document.querySelector('#option' + i)
-                newButton.innerText=characters[i + 5].name 
-                newButton.addEventListener("click", startDialog)
-            }
-        }
-        
+        characters = data        
     })
-}
 
 showNPCButton.addEventListener('click', showNPCs)

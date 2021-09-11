@@ -13,6 +13,11 @@ var closeDialogHelp = document.getElementById('closeDialogHelp')
 var openMapButton = document.getElementById('showMap')
 var mapmod = document.getElementById('mapMod')
 
+var whoToTalkButton = document.getElementById('whoToTalk')
+var whoToTalkMod = document.getElementById('WhoToTalkMod')
+var closeWhoToTalkMod = document.getElementById('closeWhoToTalkMod')
+var insertName = document.getElementById('insertName')
+
 var town1Button = document.getElementById('town1')
 var town2Button = document.getElementById('town2')
 var dungeonButton = document.getElementById('dungeon')
@@ -50,7 +55,8 @@ fetch(startUrl).then(function(response){
     })
 })
 
-function startDungeon(){
+function startDungeon(e){
+    e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
     destroyContent() //called in html-handler.js
     battleStart()
 }
@@ -93,6 +99,11 @@ if (myChar != null){
         startBattle = false;
         tutorialReady()
     }
+
+    if (playerDead){
+        youDied()
+        playerDead = false
+    }
 }
 }, 1000);
 function diceRoller ()
@@ -118,11 +129,21 @@ function startGame(){
 }
 
 function closeMod(e){
-    console.log(e)
     e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
 }
 function showMap(e){
     mapmod.classList.add('is-active')
+}
+function openTalkToMod(){
+    insertName.innerHTML = ""
+    for (var i = 0; i < 10; i++){
+        if (characters[i].npcNum <= myChar.deaths && characters[i].buffGiven === false){
+            var newName = document.createElement('p')
+            newName.innerText = characters[i].name
+            insertName.appendChild(newName)
+        }
+    }
+    whoToTalkMod.classList.add('is-active')
 }
 
 startButton.addEventListener('click', startGame)
@@ -141,3 +162,5 @@ dungeonButton.addEventListener('click', startDungeon)
 town1Button.addEventListener('click', switchTown)
 town2Button.addEventListener('click', switchTown)
 
+whoToTalkButton.addEventListener('click', openTalkToMod)
+closeWhoToTalkMod.addEventListener('click', closeMod)

@@ -11,47 +11,23 @@
 
     <nav class="level">
 
+
       
-        <div class="level-item has-text-centered">
-          <div>
-            <a class="heading" href="dialog.html">Dialog</a>
-            
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <a class="heading" href="battle.html">Battle</a>
-            
-          </div>
-
-        
-
-
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <a class="heading" href="map.html">Map</a>
-            
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <a class="heading" href="index.html">Home</a>
-
-            
-            
-          </div>
-        </div>
       </nav>
 
     
     <header>
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
+
+          <!-- changed title to a DND image -->
+
+          <figure class="image is-195x195" >
+            
+            <img src="assets/imgs/DNDtxt.png">
+          </figure>
           
-            <p> 
-              <img src="assets/imgs/DND.jpeg">
-            </p> <!-- changeto an image later -->
+            
 
           
       
@@ -60,7 +36,21 @@
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
+
       
+
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" style="margin: auto;"  onclick=showLeaderBoard()>view leaderboard
+              
+              
+            </a>
+          </div>
+        </div>
+      </nav>
+
     </header>
 
     <div class="columns dialog-container">
@@ -76,20 +66,13 @@
           </div>
       </div>
 
-      <div class="column is-2 is-offset-1" style="border: black solid;"> 
-          
-      </div>
-    </div>
-
-    <div class="colums">
-      <div class="column is-2 is-offset-9" style="text-align: center;">
+      <div class="column is-2 is-offset-1" style="border: black solid; text-align: center;" id="rightBox"> 
         <button class="button is-primary" id="showList">Talk To NPC's</button>
         <button class="button is-primary" id="showMap" style="margin-top: 2%;">Show Map</button>
         <button class="button is-primary" id="viewChar" style="margin-top: 2%;">View Character</button>
+        <button class="button is-primary" id="whoToTalk" style="margin-top: 2%;">Who To Talk To</button>
       </div>
     </div>
-
-
 
     <div class="modal" id="charMod">
       <div class="modal-background"></div>
@@ -129,9 +112,6 @@
           <button class="button is-primary" id="option3"></button>
           <button class="button is-primary" id="option4"></button>
         </section>
-        <footer class="modal-card-foot">
-          <button class="button is-success" id="Close">Close</button>
-        </footer>
       </div>
     </div>
 
@@ -139,7 +119,7 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">NPC's</p>
+          <p class="modal-card-title">Choose Destination</p>
           <button class="delete" aria-label="close" id="closeMapMod"></button>
         </header>
         <section class="modal-card-body">
@@ -148,9 +128,6 @@
           <button class="button is-primary" id="dungeon">dungeon</button>
 
         </section>
-        <footer class="modal-card-foot">
-          <button class="button is-success" id="Close">Close</button>
-        </footer>
       </div>
     </div>
 
@@ -295,6 +272,50 @@
             characters and ask them for help. If they say they can't help you then go back to them again when you have died a few more
             times. 
           </p>
+        </section>
+      </div>
+    </div>
+
+
+    <div class="modal" id="leaderStats">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">LeaderBoard</p>
+          <button class="delete" aria-label="close" id="closeLeaderBoard"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="content">
+            <div class="columns" style="margin-top: 2%;">
+              <div class="column is-2" style="border: black solid 2px; text-align: center;">
+                <p>Name</p>
+                <hr>
+              </div>
+              <div class="column is-4" style="border: black solid 2px; text-align: center;" id="nameCol">
+                <p id="name0">No Wins Yet</p>
+                <hr>
+              </div>
+              <div class="column is-2" style="border: black solid 2px; text-align: center;">
+                <p>Deaths</p>
+                <hr>
+              </div>
+              <div class="column is-4" style="border: black solid 2px; text-align: center;" id="deathCol">
+                <p id="death0">No Wins Yet</p>
+                <hr>
+              </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="modal" id="WhoToTalkMod">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Who You Should Talk To</p>
+          <button class="delete" aria-label="close" id="closeWhoToTalkMod"></button>
+        </header>
+        <section class="modal-card-body" id="insertName">
+          
         </section>
       </div>
     </div>

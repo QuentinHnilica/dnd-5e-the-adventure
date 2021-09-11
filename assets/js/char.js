@@ -6,18 +6,19 @@ var equipmentUrl = '/api/equipment/'
 var spellUrl = '/api/spells/'
 var theData
 var raceButtons = [] 
-var possibleClasses = ['Wizard', 'Barbarian', 'Ranger']
+var possibleClasses = ['Wizard', 'Barbarian', 'Ranger'] 
 var classButtons = []
-var wizardSpells = [
+// wizard attacks, spells, and defense
+var wizardSpells = [            
     fireBolt={
         discription: 'You hurl a mote of fire at a creature',
-        damage: 10,
+        damage: 4,
         atkNum: 1,
         name: 'fire Bolt'
     },
     frostBite={
         discription: 'You cause numbing frost to form on one creature',
-        damage: 6,
+        damage: 3,
         atkNum: 2,
         name: 'frost Bite'
     },
@@ -34,10 +35,11 @@ var wizardSpells = [
         name: 'magic Missle'
     }
 ]
-var barbarianAttacks = [
+// barbarian attacks, weapons, and defense
+var barbarianAttacks = [ 
     greatAxe = {
         discription: 'Stike enemy down with a swing of your axe',
-        damage : 10,
+        damage : 4,
         atkNum : 1,
         name: "Great Axe"
     },
@@ -55,15 +57,16 @@ var barbarianAttacks = [
     },
     execute = {
         discription: 'Jump towards an enemy slicing them down the middle. If it executes, you can use again',
-        damage : 12,
+        damage : 5,
         atkNum : 1,
         name: 'execute'
     }
 ]
+// ranger weapons, how it charged, and how to heal yourself
 var rangerAttacks = [
     longbow = {
         discription: 'Hurl an arrow at your foe',
-        damage : 10,
+        damage : 4,
         atkNum : 1,
         name: 'longbow'
     },
@@ -81,7 +84,7 @@ var rangerAttacks = [
     },
     multiShot = {
         discription: 'Shoot 3 Arrows at your target',
-        damage : 6,
+        damage : 5,
         atkNum : 3,
         name: 'Multi Shot'
     }
@@ -96,7 +99,9 @@ var nameBox = document.querySelector('#myName')
 var model = document.querySelector('#charMod')
 var charSheetButton = document.querySelector('#viewChar')
 var charModel = document.querySelector('#charSheet')
-
+var oldAc
+var rightBox = document.getElementById('rightBox')
+var myHp 
 //general function for getting info from API
 function search(nameKey, myArray){
     for (var i=0; i < myArray.length; i++) {
@@ -105,7 +110,7 @@ function search(nameKey, myArray){
         }
     }
 }
-
+// list of character abillities scores
 function makeCharSheet(){
     document.getElementById('charName').innerText = myChar.name
     document.getElementById('str').innerText = myChar.stats.str
@@ -128,85 +133,94 @@ function makeCharSheet(){
         }
         
     }
+    myHp = document.createElement('p')
+    myHp.innerText = "Current HP: " + myChar.currHP
+    rightBox.appendChild(myHp)
 }
-
+// choose attacks
 function pickSpells(){
-    var chosenClass = classOption.value
+    if (nameBox.value != ""){
+        var chosenClass = classOption.value
 
-    var myRace = raceOption.value
-    var raceIndex = search(myRace, theData.results)
-    if (raceIndex != null){
-        fetch(refUrl + raceIndex.url).then(function(response){
-            response.json().then(function(data){
-                var raceData = data
-                myChar.race = myRace
-                myChar.size = data.size
-                myChar.speed = data.speed
+        var myRace = raceOption.value
+        var raceIndex = search(myRace, theData.results)
+        if (raceIndex != null){
+            fetch(refUrl + raceIndex.url).then(function(response){
+                response.json().then(function(data){
+                    var raceData = data
+                    myChar.race = myRace
+                    myChar.size = data.size
+                    myChar.speed = data.speed
+                })
             })
-        })
-    }
-
-    if (chosenClass == 'Wizard'){
-        myChar.attacks = wizardSpells
-        stats.str = -1
-        stats.dex = 4
-        stats.con = 0
-        stats.int = 3
-        stats.wis = 5
-        stats.char = 1
-        myChar.initiative = 4
-        myChar.maxHP = 12
-        myChar.currHP = 12
-        myChar.ac = 12
-        myChar.stats = stats
-    }
-    else if (chosenClass == 'Ranger'){
-        myChar.attacks = rangerAttacks
-        stats.str = 3
-        stats.dex = 5
-        stats.con = -1
-        stats.int = 0
-        stats.wis = 4
-        stats.char = 1
-        myChar.initiative = 5
-        myChar.maxHP = 10
-        myChar.currHP = 10
-        myChar.ac = 14
-        myChar.stats = stats
+        }
+    
+        if (chosenClass == 'Wizard'){
+            myChar.attacks = wizardSpells
+            stats.str = -1
+            stats.dex = 4
+            stats.con = 0
+            stats.int = 3
+            stats.wis = 5
+            stats.char = 1
+            myChar.initiative = 4
+            myChar.maxHP = 8
+            myChar.currHP = 8
+            myChar.ac = 10
+            myChar.stats = stats
+        }
+        else if (chosenClass == 'Ranger'){
+            myChar.attacks = rangerAttacks
+            stats.str = 3
+            stats.dex = 5
+            stats.con = -1
+            stats.int = 0
+            stats.wis = 4
+            stats.char = 1
+            myChar.initiative = 5
+            myChar.maxHP = 8
+            myChar.currHP = 8
+            myChar.ac = 10
+            myChar.stats = stats
+        }
+        else{
+            myChar.attacks = barbarianAttacks
+            stats.str = 5
+            stats.dex = 1
+            stats.con = 4
+            stats.int = -1
+            stats.wis = 0
+            stats.char = 1
+            myChar.initiative = 5
+            myChar.maxHP = 12
+            myChar.currHP = 12
+            myChar.ac = 12
+            myChar.stats = stats
+        }
+        oldAc = myChar.ac
+        myChar.deaths = 0
+        myChar.name = nameBox.value
+        makeCharSheet()
+        startBattle = true;
+        model.classList.remove('is-active')
+        destroyContent()
+        startTutorial()
     }
     else{
-        myChar.attacks = barbarianAttacks
-        stats.str = 5
-        stats.dex = 1
-        stats.con = 4
-        stats.int = -1
-        stats.wis = 0
-        stats.char = 1
-        myChar.initiative = 5
-        myChar.maxHP = 16
-        myChar.currHP = 16
-        myChar.ac = 15
-        myChar.stats = stats
+        nameBox.placeholder = 'Please Choose A Name'
     }
-    myChar.deaths = 0
-    myChar.name = nameBox.value
-    makeCharSheet()
-    startBattle = true;
-    model.classList.remove('is-active')
-    destroyContent()
-    startTutorial()
 }
-
+// decrementing health status or gaining health for ranger
 function applyDamage(amt, bool){
     if (bool){
         myChar.currHP -= amt
         console.log(myChar.currHP)
         if (myChar.currHP <= 0){
-            console.log('you die')
+            onDeath()
             playerDead = true;
             myChar.deaths++
+            myChar.currHP = myChar.maxHP
         }
-        playerDead = false;
     }
     else{
         myChar.currHP += amt
@@ -214,15 +228,17 @@ function applyDamage(amt, bool){
             myChar.currHP = myChar.maxHP
         }
     }
-    
+    myHp.innerText = "Current HP: " + myChar.currHP
 }
-
+// decrementing health status or gaining health for barbarian
 function armorUPBuff(bool){
+    
     if (bool){
+        oldAc = myChar.ac
         myChar.ac += 2
     }
     else{
-        myChar.ac = 15
+        myChar.ac = oldAc
     }
     
 }
@@ -256,7 +272,7 @@ function makeChar(apiInfo, refUrl){
 
     
 }
-
+// display character and character name
 function showChar(){
     if (myChar.name != null){
         charModel.classList.add('is-active')
