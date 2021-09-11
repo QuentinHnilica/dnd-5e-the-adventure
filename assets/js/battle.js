@@ -494,6 +494,7 @@ function destroyExtraButtons(buttonsToKill){
 
 function battleStart(){
     battleContent(currentFloor)
+    turn = 0
     destroyButtArr = []
     enemiesToFight = []
     thePTag = document.querySelector('#battleText')
@@ -522,6 +523,7 @@ function battleStart(){
         }
         for (var i = 0; i < amtOfEnemies; i++){
             if (currentFloor === 1){
+                myChar.currHP = myChar.maxHP
                 newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
                 newEnemy.name = 'testDummy' + (i + 1)
                 enemiesToFight[i] = newEnemy
