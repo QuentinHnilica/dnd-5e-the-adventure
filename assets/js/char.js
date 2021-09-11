@@ -213,7 +213,6 @@ function applyDamage(amt, bool){
             myChar.deaths++
             myChar.currHP = myChar.maxHP
         }
-        playerDead = false;
     }
     else{
         myChar.currHP += amt

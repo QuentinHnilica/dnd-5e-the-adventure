@@ -122,18 +122,20 @@ var chargeActive = false
 var isRaged = false
 var rageCount = 0
 var targets = [] //for your ult
+var hpUpdaters = []
 var multiAttack
 var canUlt = true
 var executeAgain = false
 var barbUlt
 
 var thePTag
+var hpUpdater
+
 
 var currentFloor = 1
 function rollInitiative(){ //find turn rotation
     var turnRotation = []
     for (var i = 0; i < amtOfEnemies; i++){
-        console.log(enemiesToFight[i])
         roll = {         
             enemy: enemiesToFight[i],
             thierRoll: Math.floor(Math.random() * (21 - 1) + 1) + enemiesToFight[i].initiative
@@ -153,6 +155,8 @@ function rollInitiative(){ //find turn rotation
 function battleOver(){
     if (currentFloor < 5){
         armorUPBuff(false)
+        targets = []
+        hpUpdaters = []
         canUlt = true
         canUseAU = true
         isRaged = false
@@ -167,6 +171,20 @@ function battleOver(){
     else{
         youWin(myChar)
     }
+}
+
+function youDied(){
+    armorUPBuff(false)
+    targets = []
+    hpUpdaters = []
+    canUlt = true
+    canUseAU = true
+    isRaged = false
+    chargeActive = false
+    shieldCount = 1
+    activeShield = false
+    turn = 0
+    currentFloor = 1
 }
 
 
@@ -199,14 +217,18 @@ function BattleText(str){
             if (playerDead == true){
                 return
             }
-            
+            battleLogic()
         clearInterval(genTime)
-        battleLogic()
+        
     }, 3000);
 }
 
 
 function battleLogic(){ //this is where the battle code is. Also, the var turn is the index.
+    if (playerDead){
+        return
+    }
+
     if (turnOrder[turn].enemy == null){ //player battle logic
         thePTag.innerText = 'Your Turn'
         playersTurn = true;
@@ -258,7 +280,6 @@ function battleLogic(){ //this is where the battle code is. Also, the var turn i
 function getTargets(targetAmt , theMove){
     var moveUpdate = setInterval(function(){
         if (targets.length < targetAmt){
-   
         }
         else{
             for (var i = 0; i < targets.length; i++){
@@ -274,10 +295,10 @@ function getTargets(targetAmt , theMove){
                     
                     if(targets[i].hp <= 0){
                         targets[i].isDead = true
+                        hpUpdaters[i].innerText = 'Dead'
                     }
                     else{
-                        //button2.lastChild.innerText = newEnemy.hp
-                        //update HP Element here and in the if above.
+                        hpUpdaters[i].innerText = targets[i].hp
                     }
                     
                     var gameOver = checkForDeath()
@@ -289,8 +310,9 @@ function getTargets(targetAmt , theMove){
             playersTurn = false
             multiAttack = false
             canUlt = false
-            clearInterval(moveUpdate)
             battleLogic()
+            clearInterval(moveUpdate)
+            
             
         }
     }, 1000)
@@ -305,11 +327,11 @@ function executeUlt(){
                 if(myTarget.hp > 0){
                     executeAgain = false
                     playersTurn = false
+                    hpUpdater.innerText = myTarget.hp
                     battleLogic()
-                    console.log('didnt kill')
                 }
                 else{
-                    console.log('did kill')
+                    hpUpdater.innerText = "Dead"
                     myTarget.isDead = true
                 }
         
@@ -321,7 +343,7 @@ function executeUlt(){
             else{
                 playersTurn = false
                 executeAgain = false
-                battleLogic()
+                BattleText('You Missed')
             }
         }
     }
@@ -346,13 +368,12 @@ function useMove(e){
                                 myTarget.hp -= getMove.damage
                             }
                             
-                            console.log(myTarget.hp)
                             if(myTarget.hp <= 0){
                                 myTarget.isDead = true
+                                hpUpdater.innerText = "Dead"
                             }
                             else{
-                                //button2.lastChild.innerText = newEnemy.hp
-                                //update HP Element here and in the if above.
+                                hpUpdater.innerText = myTarget.hp
                             }
                             
                             var gameOver = checkForDeath()
@@ -454,9 +475,11 @@ function setTarget(e){
     
     if (multiAttack){
         targets.push(getEnemy)
+        hpUpdaters.push(e.target.parentElement.children[1])
     }
     else{
         myTarget = getEnemy
+        hpUpdater = e.target.parentElement.children[1]
         if (executeAgain){
             executeUlt()
         }
@@ -559,7 +582,6 @@ function battleStart(){
         newButton.innerText = myChar.attacks[o].name
         newButton.addEventListener('click', useMove)
     }
-    console.log(enemiesToFight)
     turnOrder = rollInitiative()
     battleLogic()
 }
