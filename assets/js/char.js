@@ -6,9 +6,10 @@ var equipmentUrl = '/api/equipment/'
 var spellUrl = '/api/spells/'
 var theData
 var raceButtons = [] 
-var possibleClasses = ['Wizard', 'Barbarian', 'Ranger']
+var possibleClasses = ['Wizard', 'Barbarian', 'Ranger'] 
 var classButtons = []
-var wizardSpells = [
+// wizard attacks, spells, and defense
+var wizardSpells = [            
     fireBolt={
         discription: 'You hurl a mote of fire at a creature',
         damage: 10,
@@ -34,7 +35,8 @@ var wizardSpells = [
         name: 'magic Missle'
     }
 ]
-var barbarianAttacks = [
+// barbarian attacks, weapons, and defense
+var barbarianAttacks = [ 
     greatAxe = {
         discription: 'Stike enemy down with a swing of your axe',
         damage : 10,
@@ -60,6 +62,7 @@ var barbarianAttacks = [
         name: 'execute'
     }
 ]
+// ranger weapons, how it charged, and how to heal yourself
 var rangerAttacks = [
     longbow = {
         discription: 'Hurl an arrow at your foe',
@@ -105,7 +108,7 @@ function search(nameKey, myArray){
         }
     }
 }
-
+// list of character abillities scores
 function makeCharSheet(){
     document.getElementById('charName').innerText = myChar.name
     document.getElementById('str').innerText = myChar.stats.str
@@ -129,7 +132,7 @@ function makeCharSheet(){
         
     }
 }
-
+// choose attacks
 function pickSpells(){
     var chosenClass = classOption.value
 
@@ -196,7 +199,7 @@ function pickSpells(){
     destroyContent()
     startTutorial()
 }
-
+// decrementing health status or gaining health for ranger
 function applyDamage(amt, bool){
     if (bool){
         myChar.currHP -= amt
@@ -216,7 +219,7 @@ function applyDamage(amt, bool){
     }
     
 }
-
+// decrementing health status or gaining health for barbarian
 function armorUPBuff(bool){
     if (bool){
         myChar.ac += 2
@@ -256,7 +259,7 @@ function makeChar(apiInfo, refUrl){
 
     
 }
-
+// display character and character name
 function showChar(){
     if (myChar.name != null){
         charModel.classList.add('is-active')

@@ -1,11 +1,11 @@
 var mainBox = document.querySelector('#mainBox')
 
 var deathRuns
-
+// clear page
 function destroyContent(){
     mainBox.innerHTML = ''
 }
-
+// character dialogue
 function dialogContent(){
 
     var newDiv = document.createElement('div')
@@ -15,7 +15,7 @@ function dialogContent(){
     newP.id = 'response'
     newDiv.appendChild(newP)
 
-
+     // dialogue buttons
     var dialogButtonDiv = document.createElement('div')
     dialogButtonDiv.classList.add('columns')
     dialogButtonDiv.classList.add('dialogOptions')
@@ -141,7 +141,7 @@ function battleContent(currentFloor){
 
    
 }
-
+// start screen and select map
 function startScreen(){
     destroyContent()
 
@@ -156,14 +156,14 @@ function startScreen(){
     dialogButtonDiv.classList.add('dialogOptions')
     mainBox.appendChild(dialogButtonDiv)
 }
-
+// map selection and direction
 function showMod(e){
     console.log(e)
     var thisMod = document.querySelector('#' + e.target.accessKey) 
     thisMod.classList.add('is-active')
 }
 
-
+        // Game directions
 function howToPlay(){
     var startGameButton = document.createElement('button')
     startGameButton.classList.add('button')
@@ -199,7 +199,7 @@ function howToPlay(){
     document.querySelector('#question3').accessKey = 'dialogHelp'
     
 }
-
+    // start game tutorial or skip
 function startTutorial(){
     var dialogDiv = document.createElement('div')
     dialogDiv.classList.add('columns')
@@ -227,7 +227,7 @@ function saveStats(){
     //local Storage Stats
     console.log(deathRuns)
 }
-
+// end game results
 function youWin(charStats){
     destroyContent()
     deathRuns = charStats.deaths
