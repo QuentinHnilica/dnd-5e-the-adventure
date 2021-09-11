@@ -74,30 +74,30 @@ function startDialog(e){
 }
 // show non player character
 function showNPCs(){
+    if (inTown1){
+        for(var i=0;i < 5; i++){
+            var newButton = document.querySelector('#option' + i)
+            newButton.innerText=characters[i].name 
+            newButton.addEventListener("click", startDialog)
+        }
+    }
+    else{
+        for(var i=0;i < 5; i++){
+            var newButton = document.querySelector('#option' + i)
+            newButton.innerText=characters[i + 5].name 
+            newButton.addEventListener("click", startDialog)
+        }
+    }
     modelNpc.classList.add('is-active')
-    fetch('./assets/dialog.json')
+    
+}
+
+fetch('./assets/dialog.json')
     .then(function (response) {
         return response.json()
     })
     .then(function (data) {
-        characters = data
-        console.log(data)
-        if (inTown1){
-            for(var i=0;i < 5; i++){
-                var newButton = document.querySelector('#option' + i)
-                newButton.innerText=characters[i].name 
-                newButton.addEventListener("click", startDialog)
-            }
-        }
-        else{
-            for(var i=0;i < 5; i++){
-                var newButton = document.querySelector('#option' + i)
-                newButton.innerText=characters[i + 5].name 
-                newButton.addEventListener("click", startDialog)
-            }
-        }
-        
+        characters = data        
     })
-}
 
 showNPCButton.addEventListener('click', showNPCs)

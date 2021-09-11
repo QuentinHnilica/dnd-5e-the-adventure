@@ -1,7 +1,18 @@
 var mainBox = document.querySelector('#mainBox')
-
 var deathRuns
+
 // clear page
+
+var charName
+
+var localData = window.localStorage
+
+var leaderMod = document.querySelector('#leaderStats')
+var closeLeaderMod = document.querySelector('#closeLeaderBoard')
+var nameCol = document.querySelector('#nameCol')
+var deathCol = document.querySelector('#deathCol')
+
+
 function destroyContent(){
     mainBox.innerHTML = ''
 }
@@ -141,7 +152,29 @@ function battleContent(currentFloor){
 
    
 }
+
 // start screen and select map
+
+function onDeath(){
+    destroyContent()
+
+    var startText = document.createElement('p')
+    startText.innerText = 'You Died, Try again'
+    startText.style = 'font-weight: bold; font-size: 30px;'
+    var tryagainButton = document.createElement('button')
+    tryagainButton.innerText = 'Try Again'
+    tryagainButton.addEventListener('click', startScreen)
+    mainBox.appendChild(startText)
+    mainBox.appendChild(tryagainButton)
+
+
+    var dialogButtonDiv = document.createElement('div')
+    dialogButtonDiv.classList.add('columns')
+    dialogButtonDiv.classList.add('dialogOptions')
+    mainBox.appendChild(dialogButtonDiv)
+}
+
+
 function startScreen(){
     destroyContent()
 
@@ -223,14 +256,59 @@ function startTutorial(){
     dialogDiv.appendChild(skipTutButton)
 }
 
+function updateLeaderBoard(){
+    if (localData.length != 0){
+        var name0 = document.querySelector('#name0')
+        var death0 = document.querySelector('#death0')
+        var firstRun = localData.getItem('run0')
+        var theName = firstRun.replace(/[^a-zA-Z]/g,"")
+        var theDeathStr = firstRun.replace(/\D/g,'')
+        var actualDeath = Number(theDeathStr)
+        name0.innerText = theName
+        death0.innerText = actualDeath
+
+        for (var i = 1; i < localData.length; i++){
+            if(localData.getItem('run' + i) != null){
+                var nextRun = localData.getItem('run' + i)
+                var nextName = nextRun.replace(/[^a-zA-Z]/g,"")
+                var nextDeathStr = nextRun.replace(/\D/g,'')
+                var realDeath = Number(nextDeathStr)
+                var newP = document.createElement('p')
+                newP.innerText = nextName
+                var newBR = document.createElement('br')
+                nameCol.appendChild(newP)
+                nameCol.appendChild(newBR)
+                var newDeathP = document.createElement('p')
+                newDeathP.innerText = realDeath
+                var newerBR = document.createElement('br')
+                deathCol.appendChild(newDeathP)
+                deathCol.appendChild(newerBR)
+            }       
+        }      
+    }
+}
+
 function saveStats(){
     //local Storage Stats
-    console.log(deathRuns)
+    if (localData.length != 0){
+        var length = localData.length
+        for (var i = 0; i < length + 1; i++){
+            if (localData.getItem('run'+ i) === null){
+                localData.setItem('run'+ i, charName + deathRuns)
+            }
+        }
+    }
+    else{
+        localData.setItem('run'+ 0, charName + deathRuns)
+    }
+    
+    
 }
 // end game results
 function youWin(charStats){
     destroyContent()
     deathRuns = charStats.deaths
+    charName = charStats.name
     var startText = document.createElement('p')
     startText.innerText = 'Congrats You Won!'
     startText.style = 'font-weight: bold; font-size: 30px;'
@@ -248,3 +326,16 @@ function youWin(charStats){
     dialogButtonDiv.classList.add('dialogOptions')
     mainBox.appendChild(dialogButtonDiv)
 }
+
+function showLeaderBoard(){
+    updateLeaderBoard()
+    leaderMod.classList.add('is-active')
+}
+
+function closeLeaderBoard(){
+    leaderMod.classList.remove('is-active')
+}
+
+
+closeLeaderMod.addEventListener('click', closeLeaderBoard)
+
