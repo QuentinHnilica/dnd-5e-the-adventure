@@ -11,13 +11,13 @@ var classButtons = []
 var wizardSpells = [
     fireBolt={
         discription: 'You hurl a mote of fire at a creature',
-        damage: 10,
+        damage: 4,
         atkNum: 1,
         name: 'fire Bolt'
     },
     frostBite={
         discription: 'You cause numbing frost to form on one creature',
-        damage: 6,
+        damage: 3,
         atkNum: 2,
         name: 'frost Bite'
     },
@@ -37,7 +37,7 @@ var wizardSpells = [
 var barbarianAttacks = [
     greatAxe = {
         discription: 'Stike enemy down with a swing of your axe',
-        damage : 10,
+        damage : 4,
         atkNum : 1,
         name: "Great Axe"
     },
@@ -55,7 +55,7 @@ var barbarianAttacks = [
     },
     execute = {
         discription: 'Jump towards an enemy slicing them down the middle. If it executes, you can use again',
-        damage : 12,
+        damage : 5,
         atkNum : 1,
         name: 'execute'
     }
@@ -63,7 +63,7 @@ var barbarianAttacks = [
 var rangerAttacks = [
     longbow = {
         discription: 'Hurl an arrow at your foe',
-        damage : 10,
+        damage : 4,
         atkNum : 1,
         name: 'longbow'
     },
@@ -81,7 +81,7 @@ var rangerAttacks = [
     },
     multiShot = {
         discription: 'Shoot 3 Arrows at your target',
-        damage : 6,
+        damage : 5,
         atkNum : 3,
         name: 'Multi Shot'
     }
@@ -97,6 +97,8 @@ var model = document.querySelector('#charMod')
 var charSheetButton = document.querySelector('#viewChar')
 var charModel = document.querySelector('#charSheet')
 var oldAc
+var rightBox = document.getElementById('rightBox')
+var myHp 
 //general function for getting info from API
 function search(nameKey, myArray){
     for (var i=0; i < myArray.length; i++) {
@@ -128,6 +130,9 @@ function makeCharSheet(){
         }
         
     }
+    myHp = document.createElement('p')
+    myHp.innerText = "Current HP: " + myChar.currHP
+    rightBox.appendChild(myHp)
 }
 
 function pickSpells(){
@@ -156,9 +161,9 @@ function pickSpells(){
             stats.wis = 5
             stats.char = 1
             myChar.initiative = 4
-            myChar.maxHP = 12
-            myChar.currHP = 12
-            myChar.ac = 12
+            myChar.maxHP = 8
+            myChar.currHP = 8
+            myChar.ac = 10
             myChar.stats = stats
         }
         else if (chosenClass == 'Ranger'){
@@ -170,9 +175,9 @@ function pickSpells(){
             stats.wis = 4
             stats.char = 1
             myChar.initiative = 5
-            myChar.maxHP = 10
-            myChar.currHP = 10
-            myChar.ac = 14
+            myChar.maxHP = 8
+            myChar.currHP = 8
+            myChar.ac = 10
             myChar.stats = stats
         }
         else{
@@ -184,9 +189,9 @@ function pickSpells(){
             stats.wis = 0
             stats.char = 1
             myChar.initiative = 5
-            myChar.maxHP = 16
-            myChar.currHP = 16
-            myChar.ac = 15
+            myChar.maxHP = 12
+            myChar.currHP = 12
+            myChar.ac = 12
             myChar.stats = stats
         }
         oldAc = myChar.ac
@@ -220,7 +225,7 @@ function applyDamage(amt, bool){
             myChar.currHP = myChar.maxHP
         }
     }
-    
+    myHp.innerText = "Current HP: " + myChar.currHP
 }
 
 function armorUPBuff(bool){
