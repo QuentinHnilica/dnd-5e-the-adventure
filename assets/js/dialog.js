@@ -6,14 +6,28 @@ var thisObject
 var showNPCButton = document.querySelector('#showList')
 var modelNpc = document.querySelector('#dialogMod')
 var inTown1 = true
+
+var jokeUrl = 'https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit'
+var myKey = 'd4e5fa30-14eb-11ec-bf21-3bbe39eb27e3'
+var testImg = document.querySelector('#testImg')
+
+function tellJoke(){
+    fetch(jokeUrl).then(function(response){
+        response.json().then(function(data){
+            console.log(data)
+            pEl.innerText = data.setup + " .... " + data.delivery
+        })
+    })
+    
+}
 // non player character responses
 function displayText(e){
     var myResponse =e.target.innerText
     if(myResponse === "nice"){
         pEl.innerText=thisObject.nice
     }
-    else if(myResponse === "mean"){
-        pEl.innerText=thisObject.mean 
+    else if(myResponse === "Tell Joke"){
+        tellJoke() 
 
     } 
     else if (myResponse === "goodby"){
@@ -67,7 +81,13 @@ function startDialog(e){
     pEl.innerText=thisObject.greet 
     for(var o=0;o<4;o++){
     var newButton = document.querySelector('#option' + o)
-    newButton.innerText=buttonText[o]  
+    if (o === 2){
+        newButton.innerText = "Tell Joke"
+    }
+    else{
+        newButton.innerText=buttonText[o]  
+    }
+    
     newButton.addEventListener("click",displayText)
 
     }
@@ -98,6 +118,7 @@ fetch('./assets/dialog.json')
     })
     .then(function (data) {
         characters = data        
-    })
+})
+
 
 showNPCButton.addEventListener('click', showNPCs)

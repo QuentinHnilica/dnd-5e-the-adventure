@@ -104,7 +104,6 @@ if (myChar != null){
 
     if (playerDead){
         youDied()
-        playerDead = false
     }
 }
 }, 1000);
