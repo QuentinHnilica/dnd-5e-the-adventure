@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DND</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> <!--css wireframe-->
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
@@ -15,7 +16,7 @@
       
       </nav>
 
-    
+    <!--header and leaderboard-->
     <header>
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
@@ -52,7 +53,7 @@
       </nav>
 
     </header>
-
+<!--main game box start game-->
     <div class="columns dialog-container">
       <div class="column is-1">
       </div>
@@ -65,7 +66,7 @@
             
           </div>
       </div>
-
+        <!-- right box actions and info-->
       <div class="column is-2 is-offset-1" style="border: black solid; text-align: center;" id="rightBox"> 
         <button class="button is-primary" id="showList">Talk To NPC's</button>
         <button class="button is-primary" id="showMap" style="margin-top: 2%;">Show Map</button>
@@ -73,7 +74,7 @@
         <button class="button is-primary" id="whoToTalk" style="margin-top: 2%;">Who To Talk To</button>
       </div>
     </div>
-
+    <!--character create modal-->
     <div class="modal" id="charMod">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -97,7 +98,7 @@
         </footer>
       </div>
     </div>
-
+    <!--dialogue modal-->
     <div class="modal" id="dialogMod">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -114,7 +115,7 @@
         </section>
       </div>
     </div>
-
+    <--map modal-->
     <div class="modal" id="mapMod">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -130,7 +131,7 @@
         </section>
       </div>
     </div>
-
+<!--charSheet modal-->
     <div class="modal" id="charSheet">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -205,7 +206,7 @@
       </div>
     </div>
 
-
+<!--game objective modal-->
     <div class="modal" id="objective">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -222,7 +223,7 @@
         </section>
       </div>
     </div>
-
+    <!--battle info modal-->
     <div class="modal" id="battleInfo">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -241,7 +242,7 @@
         </section>
       </div>
     </div>
-
+    <!--map help modal-->
     <div class="modal" id="mapHelp">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -257,7 +258,7 @@
         </section>
       </div>
     </div>
-
+    <!--dialog help modal-->
     <div class="modal" id="dialogHelp">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -276,7 +277,7 @@
       </div>
     </div>
 
-
+    <!--leaderboard modal-->
     <div class="modal" id="leaderStats">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -306,7 +307,7 @@
         </section>
       </div>
     </div>
-
+    <!--who to talk to modal-->
     <div class="modal" id="WhoToTalkMod">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -319,7 +320,11 @@
         </section>
       </div>
     </div>
+
+  <!--javascript links-->
+
     <img src="" alt="" id='testImg'>
+
 
     <script src="assets/js/html-handler.js"></script>
     <script src="assets/js/char.js"></script>
