@@ -8,7 +8,6 @@ var modelNpc = document.querySelector('#dialogMod')
 var inTown1 = true
 
 var jokeUrl = 'https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit'
-var myKey = 'd4e5fa30-14eb-11ec-bf21-3bbe39eb27e3'
 var testImg = document.querySelector('#testImg')
 var canTalk = true
 
