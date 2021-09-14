@@ -225,7 +225,6 @@ function BattleText(str){
 
 
 function battleLogic(){ //this is where the battle code is. Also, the var turn is the index.
-    console.log(playerDead)
     if (playerDead){
         return
     }
@@ -239,7 +238,6 @@ function battleLogic(){ //this is where the battle code is. Also, the var turn i
         }
     }
     else{ // enemy battle logic
-        console.log(turnOrder, turn)
         if(turnOrder[turn].enemy.isDead == false){
             var myAttack = turnOrder[turn].enemy.dummyAttacks[0]
             myRoll = Math.floor(Math.random() * (21 -1 ) + 1) + turnOrder[turn].enemy.stats.str
@@ -285,7 +283,7 @@ function getTargets(targetAmt , theMove){
         }
         else{
             for (var i = 0; i < targets.length; i++){
-                var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
+                var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + myChar.atkMod
                 if (diceRoll >= targets[i].ac){
                     if (chargeActive){
                         targets[i].hp -= theMove.damage * 3
@@ -323,7 +321,7 @@ function getTargets(targetAmt , theMove){
 function executeUlt(){
     if (myTarget != null){
         if(myTarget.isDead === false){
-            var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
+            var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + myChar.atkMod
             if (diceRoll >= myTarget.ac){
                 myTarget.hp -= barbUlt.damage + 5
                 if(myTarget.hp > 0){
@@ -360,7 +358,7 @@ function useMove(e){
             if (playersTurn == true && myTarget != null){
                 if(getMove.name != 'execute'){
                     if (myTarget.isDead === false){
-                        var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
+                        var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + myChar.atkMod
                         if (diceRoll >= myTarget.ac){
                             if (chargeActive){
                                 myTarget.hp -= getMove.damage * 3

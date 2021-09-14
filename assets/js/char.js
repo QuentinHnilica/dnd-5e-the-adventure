@@ -102,6 +102,7 @@ var charModel = document.querySelector('#charSheet')
 var oldAc
 var rightBox = document.getElementById('rightBox')
 var myHp 
+var inBattle = false
 //general function for getting info from API
 function search(nameKey, myArray){
     for (var i=0; i < myArray.length; i++) {
@@ -109,6 +110,13 @@ function search(nameKey, myArray){
             return myArray[i];
         }
     }
+}
+
+function updateCharSheet(){
+    myChar.currHP = myChar.maxHP //Updates hp before displaying your new HP
+    document.getElementById('hp').innerText = "Current HP: " + myChar.currHP
+    document.getElementById('myAC').innerText = "AC: " + myChar.ac
+
 }
 // list of character abillities scores
 function makeCharSheet(){
@@ -119,6 +127,7 @@ function makeCharSheet(){
     document.getElementById('int').innerText = myChar.stats.int
     document.getElementById('char').innerText = myChar.stats.char
     document.getElementById('dex').innerText = myChar.stats.dex
+    document.getElementById('myAC').innerText = "AC: " + myChar.ac
 
     document.getElementById('init').innerText = "Initiative: " + myChar.initiative
     document.getElementById('hp').innerText = "Current HP: " + myChar.currHP
@@ -168,6 +177,7 @@ function pickSpells(){
             myChar.currHP = 8
             myChar.ac = 10
             myChar.stats = stats
+            
         }
         else if (chosenClass == 'Ranger'){
             myChar.attacks = rangerAttacks
@@ -198,6 +208,7 @@ function pickSpells(){
             myChar.stats = stats
         }
         oldAc = myChar.ac
+        myChar.atkMod = 5
         myChar.deaths = 0
         myChar.name = nameBox.value
         makeCharSheet()
@@ -214,12 +225,12 @@ function pickSpells(){
 function applyDamage(amt, bool){
     if (bool){
         myChar.currHP -= amt
-        console.log(myChar.currHP)
         if (myChar.currHP <= 0){
             onDeath()
             playerDead = true;
             myChar.deaths++
             myChar.currHP = myChar.maxHP
+            inBattle = false;
         }
     }
     else{

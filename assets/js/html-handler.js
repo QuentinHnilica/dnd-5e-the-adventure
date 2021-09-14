@@ -164,6 +164,8 @@ function onDeath(){
     var tryagainButton = document.createElement('button')
     tryagainButton.innerText = 'Try Again'
     tryagainButton.addEventListener('click', startScreen)
+    tryagainButton.classList.add('button')
+    tryagainButton.classList.add('is-primary')
     mainBox.appendChild(startText)
     mainBox.appendChild(tryagainButton)
 

@@ -10,59 +10,39 @@
   </head>
   <body>
 
-
-
-
     <!--header and leaderboard-->
     <header>
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
+   
+          <!-- this is the Red DND main pic -->
+          <div>
+            <figure class="image is-75x75" >
+              <img src="assets/imgs/DNDtxt.png">
+            </figure>
+          </div>
 
-
-
-      
-<!-- this is the Red DND main pic -->
-        <div>
-          <figure class="image is-75x75" >
-            <img src="assets/imgs/DNDtxt.png">
-          </figure>
-        </div>
-
-        <!-- this is a small lable for 5th edition, a neat syle I thought -->
-              <p class="title">
-              5th Edition  
-              </p>
+          <!-- this is a small lable for 5th edition, a neat syle I thought -->
+          <p class="title">
+          5th Edition  
+          </p>
               
-            
-            
-      
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </a>
-
-      
-          <nav> 
-            <div class="navbar-brand">
-        </div>
+          </a> 
+          <div class="navbar-brand"></div>
         
         </div>
-        <header>
         <div class="center" id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item" style="margin: auto;"  onclick=showLeaderBoard()>View Leaderboard
-              
-              
-            </a>
-          
+            <a class="navbar-item" style="margin: auto;"  onclick=showLeaderBoard()>View Leaderboard</a>
+          </div>
         </div>
       </nav>
-    </div>
-      </section>
-    
     </header>
-<!--main game box start game-->
+    <!--main game box start game-->
     <div class="columns dialog-container">
       <div class="column is-1">
       </div>
@@ -124,7 +104,7 @@
         </section>
       </div>
     </div>
-    <--map modal-->
+    <!-- map modal -->
     <div class="modal" id="mapMod">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -140,7 +120,7 @@
         </section>
       </div>
     </div>
-<!--charSheet modal-->
+    <!--charSheet modal-->
     <div class="modal" id="charSheet">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -194,7 +174,7 @@
                   <div class="column is-10" style="border: black solid 2px;">
                     <p id="init">Initive</p>
                     <hr>
-                    <p id="hp">HP</p>
+                    <p id="hp">HP</p> <p id="myAC">AC</p>
                     <hr>
                     <p style="text-align: center; font-weight: bold;">Moves</p>
                     <hr>
@@ -205,8 +185,7 @@
                     <p id="move3"></p>
                     <hr>
                     <p id="move4"></p>
-                  </div>
-                  
+                  </div>          
                 </div>
               </div>
             </div>
@@ -215,7 +194,7 @@
       </div>
     </div>
 
-<!--game objective modal-->
+    <!--game objective modal-->
     <div class="modal" id="objective">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -330,11 +309,7 @@
       </div>
     </div>
 
-  <!--javascript links-->
-
-    <img src="" alt="" id='testImg'>
-
-
+    <!--javascript links-->
     <script src="assets/js/html-handler.js"></script>
     <script src="assets/js/char.js"></script>
     <script src="assets/js/dialog.js"></script>

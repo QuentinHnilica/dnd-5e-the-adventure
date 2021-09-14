@@ -10,11 +10,11 @@ var inTown1 = true
 var jokeUrl = 'https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit'
 var myKey = 'd4e5fa30-14eb-11ec-bf21-3bbe39eb27e3'
 var testImg = document.querySelector('#testImg')
+var canTalk = true
 
 function tellJoke(){
     fetch(jokeUrl).then(function(response){
         response.json().then(function(data){
-            console.log(data)
             pEl.innerText = data.setup + " .... " + data.delivery
         })
     })
@@ -32,8 +32,8 @@ function displayText(e){
     } 
     else if (myResponse === "goodby"){
         pEl.innerText=thisObject.goodby
+        canTalk = true
         var waitTimer = setInterval(() => {
-            console.log("this is a one Second Wait")
             clearInterval(waitTimer)
             destroyContent()
             startScreen()
@@ -54,9 +54,10 @@ function displayText(e){
                     myChar.maxHP += actualStat
                 }
                 else{
-                    myChar.initiative += actualStat
+                    myChar.atkMod += actualStat
                 }
                 thisObject.buffGiven = true
+                updateCharSheet()
             }
             else{
                 pEl.innerText = thisObject.alreadyGiven
@@ -72,6 +73,7 @@ function displayText(e){
 }
 // start non player character dialog
 function startDialog(e){
+    canTalk = false
     modelNpc.classList.remove('is-active')
     var thisCharacter=e.target.innerText
     destroyContent()//nested in the html-handler.js
@@ -94,22 +96,23 @@ function startDialog(e){
 }
 // show non player character
 function showNPCs(){
-    if (inTown1){
-        for(var i=0;i < 5; i++){
-            var newButton = document.querySelector('#option' + i)
-            newButton.innerText=characters[i].name 
-            newButton.addEventListener("click", startDialog)
+    if (inBattle == false && canTalk){
+        if (inTown1){
+            for(var i=0;i < 5; i++){
+                var newButton = document.querySelector('#option' + i)
+                newButton.innerText=characters[i].name 
+                newButton.addEventListener("click", startDialog)
+            }
         }
-    }
-    else{
-        for(var i=0;i < 5; i++){
-            var newButton = document.querySelector('#option' + i)
-            newButton.innerText=characters[i + 5].name 
-            newButton.addEventListener("click", startDialog)
+        else{
+            for(var i=0;i < 5; i++){
+                var newButton = document.querySelector('#option' + i)
+                newButton.innerText=characters[i + 5].name 
+                newButton.addEventListener("click", startDialog)
+            }
         }
-    }
-    modelNpc.classList.add('is-active')
-    
+        modelNpc.classList.add('is-active')
+    }  
 }
 
 fetch('./assets/dialog.json')
