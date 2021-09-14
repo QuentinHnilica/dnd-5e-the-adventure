@@ -40,6 +40,7 @@ function startDungeon(e){
 }
 
 function switchTown(e){
+
     if (e.target.innerText === 'town1'){
         inTown1 = true
         townSwitch(inTown1)
@@ -49,6 +50,7 @@ function switchTown(e){
         townSwitch(inTown1)
     }
     e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
+
 }
 
 function beginTutorial(){
@@ -94,7 +96,7 @@ function closeMod(e){
     e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
 }
 function showMap(e){
-    if (inBattle == false){
+    if (inBattle == false && canTalk){
         mapmod.classList.add('is-active')
     } 
 }
