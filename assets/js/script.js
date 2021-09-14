@@ -64,11 +64,13 @@ function startDungeon(e){
 function switchTown(e){
     if (e.target.innerText === 'town1'){
         inTown1 = true
+        townSwitch(inTown1)
     }
     else{
         inTown1 = false
+        townSwitch(inTown1)
     }
-        
+       console.log("im here") 
     e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
 }
 
@@ -102,7 +104,6 @@ if (myChar != null){
 
     if (playerDead){
         youDied()
-        playerDead = false
     }
 }
 }, 1000);

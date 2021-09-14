@@ -1,4 +1,4 @@
-var testDummy = {
+var mindFlayer = {
     dummyAttacks : [
         basicAttack = {
             damage : 1,
@@ -225,6 +225,7 @@ function BattleText(str){
 
 
 function battleLogic(){ //this is where the battle code is. Also, the var turn is the index.
+    console.log(playerDead)
     if (playerDead){
         return
     }
@@ -238,6 +239,7 @@ function battleLogic(){ //this is where the battle code is. Also, the var turn i
         }
     }
     else{ // enemy battle logic
+        console.log(turnOrder, turn)
         if(turnOrder[turn].enemy.isDead == false){
             var myAttack = turnOrder[turn].enemy.dummyAttacks[0]
             myRoll = Math.floor(Math.random() * (21 -1 ) + 1) + turnOrder[turn].enemy.stats.str
@@ -502,6 +504,7 @@ function battleStart(){
     if (currentFloor < 5){
         amtOfEnemies = Math.floor(Math.random() * (4 - 1) + 1) //chooses 1 - 3 enemies for the player to fight
         if (amtOfEnemies === 1){
+            
             button0 = document.getElementById('enemy2')
             button1 = document.getElementById('enemy1')
             button2 = document.getElementById('enemy3')
@@ -523,13 +526,14 @@ function battleStart(){
         }
         for (var i = 0; i < amtOfEnemies; i++){
             if (currentFloor === 1){
+                playerDead = false;
                 myChar.currHP = myChar.maxHP
-                newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
-                newEnemy.name = 'testDummy' + (i + 1)
+                newEnemy = { ...mindFlayer } //Make a table of enemies and choose a random one
+                newEnemy.name = 'mindFlayer' + (i + 1)
                 enemiesToFight[i] = newEnemy
             }
             else if(currentFloor === 2){
-                newEnemy = { ...caveBadger } //change from testDummy
+                newEnemy = { ...caveBadger } //change from mindFlayer
                 newEnemy.name = 'cave Badger' + (i + 1)
                 enemiesToFight[i] = newEnemy
             }

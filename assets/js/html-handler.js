@@ -181,6 +181,7 @@ function startScreen(){
     var startText = document.createElement('p')
     startText.innerText = 'Open Your Map to select where to go'
     startText.style = 'font-weight: bold; font-size: 30px;'
+    startText.id = "starterText"
     mainBox.appendChild(startText)
 
 
@@ -336,6 +337,16 @@ function closeLeaderBoard(){
     leaderMod.classList.remove('is-active')
 }
 
+function townSwitch(bool){
+    var startText = document.getElementById("starterText")
+    
+    if(bool){
+        starterText.innerText = "You are currenty in Town 1"
+    }
+    else{
+        starterText.innerText = "You are currenty in Town 2"
+    }
+}
 
 closeLeaderMod.addEventListener('click', closeLeaderBoard)
 
