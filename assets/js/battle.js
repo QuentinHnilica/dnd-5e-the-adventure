@@ -1,4 +1,4 @@
-var testDummy = {
+var mindFlayer = {
     dummyAttacks : [
         basicAttack = {
             damage : 1,
@@ -524,12 +524,12 @@ function battleStart(){
         for (var i = 0; i < amtOfEnemies; i++){
             if (currentFloor === 1){
                 myChar.currHP = myChar.maxHP
-                newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
-                newEnemy.name = 'testDummy' + (i + 1)
+                newEnemy = { ...mindFlayer } //Make a table of enemies and choose a random one
+                newEnemy.name = 'mindFlayer' + (i + 1)
                 enemiesToFight[i] = newEnemy
             }
             else if(currentFloor === 2){
-                newEnemy = { ...caveBadger } //change from testDummy
+                newEnemy = { ...caveBadger } //change from mindFlayer
                 newEnemy.name = 'cave Badger' + (i + 1)
                 enemiesToFight[i] = newEnemy
             }
