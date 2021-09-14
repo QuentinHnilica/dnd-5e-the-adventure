@@ -1,6 +1,7 @@
 
 nav{
-  border-bottom: solid black 3px;
+  border-bottom: solid black 10px;
+  
   
   
 }
@@ -35,11 +36,51 @@ nav{
   display: flex;
   justify-content: center;
 }
-.heading{
-  font-size: 40px;
-  font-family:'Franklin Gothic Medium';
-  text-emphasis-color: darkred;
+
+
+
+
+
+
+
+
+
+.navbar-item{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: auto;
+  width: 10%;
+  color: red;
   
+  padding: 15px;
   
+}
+/* this is the background mountains picture that I syled. */
+
+body{
+  
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image:url(http://bit.ly/2gPLxZ4);
+    width: 100%;
+    height: 100%;
+    font-family: Arial, Helvetica;
+    letter-spacing: 0.02em;
+     font-weight: 400;
+    -webkit-font-smoothing: antialiased; 
+   }
+   
+
+
+
+
+  
+
+
+
+
+
+
   
 
