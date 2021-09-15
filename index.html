@@ -8,21 +8,17 @@
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
+    <!-- this is the Red DND main pic -->
+    <div class="notification has-background-white">
+      <figure class="nav-pic" >
+        <img src="assets/imgs/DNDtxt.png">
+      </figure>
+    </div>
+    <div class="container">
+    </div>
+<!-- this is a small lable for 5th edition, a neat syle I thought -->
 
-
-
-
-
-      
-<!-- this is the Red DND main pic -->
-        <div>
-          <figure class="image is-75x75" >
-            <img src="assets/imgs/DNDtxt.png">
-          </figure>
-        </div>
-
-        <!-- this is a small lable for 5th edition, a neat syle I thought -->
-              <p class="title">
+              <p class="title"style=" text-align: center;">
               5th Edition  
               </p>
               
@@ -44,7 +40,7 @@
         <header>
         <div class="center" id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item" style="margin: auto;"  onclick=showLeaderBoard()>View Leaderboard
+            <a class="navbar-item" class="styles" onclick=showLeaderBoard()>View Leaderboard
               
               
             </a>
@@ -59,9 +55,9 @@
     <div class="columns dialog-container">
       <div class="column is-1">
       </div>
-      <div class="column is-7" style="border: black solid;" id="mainBox">
+      <div class="column is-7" id="mainBox">
           <div class="start">
-            <button id="start-Button" class="button is-primary">Start Game</button>
+            <button id="start-Button" class="button has-background-danger-light">Start Game</button>
           </div>
           
           <div class="columns dialogOptions">
@@ -69,11 +65,11 @@
           </div>
       </div>
 
-      <div class="column is-2 is-offset-1" style="border: black solid; text-align: center;" id="rightBox"> 
-        <button class="button is-primary" id="showList">Talk To NPC's</button>
-        <button class="button is-primary" id="showMap" style="margin-top: 2%;">Show Map</button>
-        <button class="button is-primary" id="viewChar" style="margin-top: 2%;">View Character</button>
-        <button class="button is-primary" id="whoToTalk" style="margin-top: 2%;">Who To Talk To</button>
+      <div class="column is-2 is-offset-1" style=" text-align: center;" id="rightBox"> 
+        <button class="button has-background-danger-light is-fullwidth" id="showList">Talk To NPC's</button>
+        <button class="button has-background-danger-light is-fullwidth" id="showMap" style="margin-top: 2%;">Show Map</button>
+        <button class="button has-background-danger-light is-fullwidth" id="viewChar" style="margin-top: 2%;">View Character</button>
+        <button class="button has-background-danger-light is-fullwidth" id="whoToTalk" style="margin-top: 2%;">Who To Talk To</button>
       </div>
     </div>
 
@@ -93,7 +89,7 @@
             <select id="classes">
             </select>
           </div>
-          <input type="text" class="input is-primary" style="margin-top: 1%;" placeholder="Characters Name" id="myName">
+          <input type="text" class="input has-background-danger-light" style="margin-top: 1%;" placeholder="Characters Name" id="myName">
         </section>
         <footer class="modal-card-foot">
           <button class="button is-success" id="finished">Finished</button>
@@ -109,11 +105,11 @@
           <button class="delete" aria-label="close" id="closeDialogOptions"></button>
         </header>
         <section class="modal-card-body">
-          <button class="button is-primary" id="option0"></button>
-          <button class="button is-primary" id="option1"></button>
-          <button class="button is-primary" id="option2"></button>
-          <button class="button is-primary" id="option3"></button>
-          <button class="button is-primary" id="option4"></button>
+          <button class="button has-background-danger-light" id="option0"></button>
+          <button class="button has-background-danger-light" id="option1"></button>
+          <button class="button has-background-danger-light" id="option2"></button>
+          <button class="button has-background-danger-light" id="option3"></button>
+          <button class="button has-background-danger-light" id="option4"></button>
         </section>
       </div>
     </div>
@@ -126,9 +122,9 @@
           <button class="delete" aria-label="close" id="closeMapMod"></button>
         </header>
         <section class="modal-card-body">
-          <button class="button is-primary" id="town1">town1</button>
-          <button class="button is-primary" id="town2">town2</button>
-          <button class="button is-primary" id="dungeon">dungeon</button>
+          <button class="button has-background-danger-light" id="town1">town1</button>
+          <button class="button has-background-danger-light" id="town2">town2</button>
+          <button class="button has-background-danger-light" id="dungeon">dungeon</button>
 
         </section>
       </div>
