@@ -93,6 +93,7 @@ function startGame(){
 }
 
 function closeMod(e){
+    console.log(e)
     e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
 }
 function showMap(e){

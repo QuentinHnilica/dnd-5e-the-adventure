@@ -20,10 +20,10 @@
     </div>
 <!-- this is a small lable for 5th edition, a neat syle I thought -->
 
-              <p class="title"style=" text-align: center;">
-              5th Edition  
-              </p>
-              <a class="navbar-item" class="styles" onclick=showLeaderBoard()>View Leaderboard</a>
+    <p class="title"style=" text-align: center;">
+    5th Edition  
+    </p>
+    <a class="navbar-item" class="styles" onclick=showLeaderBoard()>View Leaderboard</a>
 
     <!--main game box start game-->
     <div class="columns dialog-container">
@@ -142,7 +142,7 @@
                     <hr>
                   </div>
                   <div class="column is-1" style="border: black solid 2px; text-align: center;" id="myScores">
-                    <p id="str"></p>
+                    <p id="str"></p><!--  scores -->
                     <hr>
                     <p id="dex">Dex</p>
                     <hr>
@@ -187,7 +187,7 @@
           <button class="delete" aria-label="close" id="closeObjective"></button>
         </header>
         <section class="modal-card-body">
-          <p>
+          <p style="color: black;">
             The Objective of the game is to defeat the boss on floor 5 of the dungeon with the least amount of deaths.
             Each death will be recorded. When you are defeated, the people of the land will give you extra power to help you 
             with your journey. Try talking to them before you're ready to try again.
@@ -204,7 +204,7 @@
           <button class="delete" aria-label="close" id="closeBattleInfo"></button>
         </header>
         <section class="modal-card-body">
-          <p>
+          <p style="color: black;">
             You are given 4 abilities to defeat your enemies. Check out your character sheet to see their descriptions! Once you have
             entered a battle, click on the enemy you want to attack and choose the ability to hit them with. Some abilities don't
             do any damage, these are status affect moves. They give you buffs to your character for a limited amount of turns, or for 
@@ -223,7 +223,7 @@
           <button class="delete" aria-label="close" id="closeMapHelp"></button>
         </header>
         <section class="modal-card-body">
-          <p>
+          <p style="color: black;">
             When you open your map you'll be given 3 places you can go to, two of them are towns with characters who can help you get
             stronger, the third option is the dungeon. Click on the dungeon when you're ready to give it your all.
           </p>
@@ -239,7 +239,7 @@
           <button class="delete" aria-label="close" id="closeDialogHelp"></button>
         </header>
         <section class="modal-card-body">
-          <p>
+          <p style="color: black;">
             These characters are here to help you along your journey. Each time you are defeated one of these characters will give you
             a buff for your next run. To access these characters, open your map and go to a town. You will be given a list of all the 
             characters and ask them for help. If they say they can't help you then go back to them again when you have died a few more
@@ -259,20 +259,20 @@
         </header>
         <section class="modal-card-body">
           <div class="content">
-            <div class="columns" style="margin-top: 2%;">
-              <div class="column is-2" style="border: black solid 2px; text-align: center;">
+            <div class="columns" style="margin-top: 2%; ">
+              <div class="column is-2" style="border: black solid 2px; text-align: center; color: black;">
                 <p>Name</p>
                 <hr>
               </div>
-              <div class="column is-4" style="border: black solid 2px; text-align: center;" id="nameCol">
+              <div class="column is-4" style="border: black solid 2px; text-align: center; color: black;" id="nameCol">
                 <p id="name0">No Wins Yet</p>
                 <hr>
               </div>
-              <div class="column is-2" style="border: black solid 2px; text-align: center;">
+              <div class="column is-2" style="border: black solid 2px; text-align: center; color: black;">
                 <p>Deaths</p>
                 <hr>
               </div>
-              <div class="column is-4" style="border: black solid 2px; text-align: center;" id="deathCol">
+              <div class="column is-4" style="border: black solid 2px; text-align: center; color: black;" id="deathCol">
                 <p id="death0">No Wins Yet</p>
                 <hr>
               </div>
@@ -284,10 +284,10 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Who You Should Talk To</p>
+          <p class="modal-card-title" style="color: black;">Who You Should Talk To</p>
           <button class="delete" aria-label="close" id="closeWhoToTalkMod"></button>
         </header>
-        <section class="modal-card-body" id="insertName">
+        <section class="modal-card-body" id="insertName" style="color: black;">
           
         </section>
       </div>
