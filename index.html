@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DND</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> <!--css wireframe-->
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
@@ -21,37 +22,39 @@
               <p class="title"style=" text-align: center;">
               5th Edition  
               </p>
+
+    <!--header and leaderboard-->
+    <header>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+   
+          <!-- this is the Red DND main pic -->
+          <div>
+            <figure class="image is-75x75" >
+              <img src="assets/imgs/DNDtxt.png">
+            </figure>
+          </div>
+
+          <!-- this is a small lable for 5th edition, a neat syle I thought -->
+          <p class="title">
+          5th Edition  
+          </p>
               
-            
-            
-      
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </a>
-
-      
-          <nav> 
-            <div class="navbar-brand">
-        </div>
+          </a> 
+          <div class="navbar-brand"></div>
         
         </div>
-        <header>
         <div class="center" id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item" class="styles" onclick=showLeaderBoard()>View Leaderboard
-              
-              
-            </a>
-          
+            <a class="navbar-item" class="styles" onclick=showLeaderBoard()>View Leaderboard</a>
         </div>
       </nav>
-    </div>
-      </section>
-    
     </header>
-
+    <!--main game box start game-->
     <div class="columns dialog-container">
       <div class="column is-1">
       </div>
@@ -64,15 +67,16 @@
             
           </div>
       </div>
-
+<!-- right box actions and info-->
       <div class="column is-2 is-offset-1" style=" text-align: center;" id="rightBox"> 
         <button class="button has-background-danger-light is-fullwidth" id="showList">Talk To NPC's</button>
         <button class="button has-background-danger-light is-fullwidth" id="showMap" style="margin-top: 2%;">Show Map</button>
         <button class="button has-background-danger-light is-fullwidth" id="viewChar" style="margin-top: 2%;">View Character</button>
         <button class="button has-background-danger-light is-fullwidth" id="whoToTalk" style="margin-top: 2%;">Who To Talk To</button>
+        
       </div>
     </div>
-
+    <!--character create modal-->
     <div class="modal" id="charMod">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -96,7 +100,7 @@
         </footer>
       </div>
     </div>
-
+    <!--dialogue modal-->
     <div class="modal" id="dialogMod">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -113,7 +117,7 @@
         </section>
       </div>
     </div>
-
+    <!-- map modal -->
     <div class="modal" id="mapMod">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -129,7 +133,7 @@
         </section>
       </div>
     </div>
-
+    <!--charSheet modal-->
     <div class="modal" id="charSheet">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -183,7 +187,7 @@
                   <div class="column is-10" style="border: black solid 2px;">
                     <p id="init">Initive</p>
                     <hr>
-                    <p id="hp">HP</p>
+                    <p id="hp">HP</p> <p id="myAC">AC</p>
                     <hr>
                     <p style="text-align: center; font-weight: bold;">Moves</p>
                     <hr>
@@ -194,8 +198,7 @@
                     <p id="move3"></p>
                     <hr>
                     <p id="move4"></p>
-                  </div>
-                  
+                  </div>          
                 </div>
               </div>
             </div>
@@ -204,7 +207,7 @@
       </div>
     </div>
 
-
+    <!--game objective modal-->
     <div class="modal" id="objective">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -221,7 +224,7 @@
         </section>
       </div>
     </div>
-
+    <!--battle info modal-->
     <div class="modal" id="battleInfo">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -240,7 +243,7 @@
         </section>
       </div>
     </div>
-
+    <!--map help modal-->
     <div class="modal" id="mapHelp">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -256,7 +259,7 @@
         </section>
       </div>
     </div>
-
+    <!--dialog help modal-->
     <div class="modal" id="dialogHelp">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -275,7 +278,7 @@
       </div>
     </div>
 
-
+    <!--leaderboard modal-->
     <div class="modal" id="leaderStats">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -305,7 +308,7 @@
         </section>
       </div>
     </div>
-
+    <!--who to talk to modal-->
     <div class="modal" id="WhoToTalkMod">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -319,6 +322,7 @@
       </div>
     </div>
 
+    <!--javascript links-->
     <script src="assets/js/html-handler.js"></script>
     <script src="assets/js/char.js"></script>
     <script src="assets/js/dialog.js"></script>

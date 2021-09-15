@@ -26,50 +26,31 @@ var dungeonButton = document.getElementById('dungeon')
 //Ex fetch/startUrl + apiInfo.casses
 fetch(startUrl).then(function(response){
     response.json().then(function(data){
-        apiInfo = data
-        // ability-scores: "/api/ability-scores"
-        // alignments: "/api/alignments"
-        // backgrounds: "/api/backgrounds"
-        // classes: "/api/classes"
-        // conditions: "/api/conditions"
-        // damage-types: "/api/damage-types"
-        // equipment: "/api/equipment"
-        // equipment-categories: "/api/equipment-categories"
-        // feats: "/api/feats"
-        // features: "/api/features"
-        // languages: "/api/languages"
-        // magic-items: "/api/magic-items"
-        // magic-schools: "/api/magic-schools"
-        // monsters: "/api/monsters"
-        // proficiencies: "/api/proficiencies"
-        // races: "/api/races"
-        // rule-sections: "/api/rule-sections"
-        // rules: "/api/rules"
-        // skills: "/api/skills"
-        // spells: "/api/spells"
-        // subclasses: "/api/subclasses"
-        // subraces: "/api/subraces"
-        // traits: "/api/traits"
-        // weapon-properties: "/api/weapon-properties"
-        
+        apiInfo = data //contains char creation data
     })
 })
 
 function startDungeon(e){
-    e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
-    destroyContent() //called in html-handler.js
-    battleStart()
+    if (inBattle == false){
+        e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
+        inBattle = true
+        destroyContent() //called in html-handler.js
+        battleStart()
+    }  
 }
 
 function switchTown(e){
+
     if (e.target.innerText === 'town1'){
         inTown1 = true
+        townSwitch(inTown1)
     }
     else{
         inTown1 = false
+        townSwitch(inTown1)
     }
-        
     e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
+
 }
 
 function beginTutorial(){
@@ -102,26 +83,9 @@ if (myChar != null){
 
     if (playerDead){
         youDied()
-        playerDead = false
     }
 }
 }, 1000);
-function diceRoller ()
-{
-    console.log(Math.floor(Math.random() * (21 - 1) + 1))   
-    //12 sided
-    console.log(Math.floor(Math.random() * (13 - 1) + 1))
-    //10 sided 
-    console.log(Math.floor(Math.random() * (11 - 1) + 1))
-    //8 sided 
-    console.log(Math.floor(Math.random() * (9 - 1) + 1))
-    //6 sided 
-    console.log(Math.floor(Math.random() * (7- 1) + 1))
-    // 4 sided 
-    console.log(Math.floor(Math.random() * (5- 1) + 1))
-}
-
-//diceRoller()
 
 function startGame(){
     makeChar(apiInfo, refUrl)
@@ -132,7 +96,9 @@ function closeMod(e){
     e.target.parentElement.parentElement.parentElement.classList.remove('is-active')
 }
 function showMap(e){
-    mapmod.classList.add('is-active')
+    if (inBattle == false && canTalk){
+        mapmod.classList.add('is-active')
+    } 
 }
 function openTalkToMod(){
     insertName.innerHTML = ""

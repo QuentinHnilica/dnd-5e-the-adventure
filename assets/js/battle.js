@@ -1,4 +1,4 @@
-var testDummy = {
+var mindFlayer = {
     dummyAttacks : [
         basicAttack = {
             damage : 1,
@@ -283,7 +283,7 @@ function getTargets(targetAmt , theMove){
         }
         else{
             for (var i = 0; i < targets.length; i++){
-                var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
+                var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + myChar.atkMod
                 if (diceRoll >= targets[i].ac){
                     if (chargeActive){
                         targets[i].hp -= theMove.damage * 3
@@ -321,7 +321,7 @@ function getTargets(targetAmt , theMove){
 function executeUlt(){
     if (myTarget != null){
         if(myTarget.isDead === false){
-            var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
+            var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + myChar.atkMod
             if (diceRoll >= myTarget.ac){
                 myTarget.hp -= barbUlt.damage + 5
                 if(myTarget.hp > 0){
@@ -358,7 +358,7 @@ function useMove(e){
             if (playersTurn == true && myTarget != null){
                 if(getMove.name != 'execute'){
                     if (myTarget.isDead === false){
-                        var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + 5
+                        var diceRoll = Math.floor(Math.random() * (21 - 1) + 1) + myChar.atkMod
                         if (diceRoll >= myTarget.ac){
                             if (chargeActive){
                                 myTarget.hp -= getMove.damage * 3
@@ -502,6 +502,7 @@ function battleStart(){
     if (currentFloor < 5){
         amtOfEnemies = Math.floor(Math.random() * (4 - 1) + 1) //chooses 1 - 3 enemies for the player to fight
         if (amtOfEnemies === 1){
+            
             button0 = document.getElementById('enemy2')
             button1 = document.getElementById('enemy1')
             button2 = document.getElementById('enemy3')
@@ -523,13 +524,14 @@ function battleStart(){
         }
         for (var i = 0; i < amtOfEnemies; i++){
             if (currentFloor === 1){
+                playerDead = false;
                 myChar.currHP = myChar.maxHP
-                newEnemy = { ...testDummy } //Make a table of enemies and choose a random one
-                newEnemy.name = 'testDummy' + (i + 1)
+                newEnemy = { ...mindFlayer } //Make a table of enemies and choose a random one
+                newEnemy.name = 'mindFlayer' + (i + 1)
                 enemiesToFight[i] = newEnemy
             }
             else if(currentFloor === 2){
-                newEnemy = { ...caveBadger } //change from testDummy
+                newEnemy = { ...caveBadger } //change from mindFlayer
                 newEnemy.name = 'cave Badger' + (i + 1)
                 enemiesToFight[i] = newEnemy
             }
