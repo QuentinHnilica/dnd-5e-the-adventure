@@ -14,7 +14,13 @@ var canTalk = true
 function tellJoke(){
     fetch(jokeUrl).then(function(response){
         response.json().then(function(data){
-            pEl.innerText = data.setup + " .... " + data.delivery
+            if (data.setup != null){
+                pEl.innerText = data.setup + " .... " + data.delivery
+            }
+            else{
+                pEl.innerText = "Sorry, I don't have a joke right now.."
+            }
+            
         })
     })
     
